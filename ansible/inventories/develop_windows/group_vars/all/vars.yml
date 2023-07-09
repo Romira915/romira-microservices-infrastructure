@@ -134,3 +134,16 @@ fonts:
       dest: C:\Users\{{ ansible_user }}\.tmp\fonts\Noto_Sans_JP.zip
     - url: https://fonts.google.com/download?family=Noto%20Serif%20JP
       dest: C:\Users\{{ ansible_user }}\.tmp\fonts\Noto_Serif_JP.zip
+optional_feature:
+  features:
+    - Microsoft-Hyper-V-All
+    - Microsoft-Windows-Subsystem-Linux
+  #  - Containers-DisposableClientVM
+# TODO: get_url installer
+package:
+  - REALFORCE CONNECT Software Setup_3-2-0.exe
+  - BandaiNamcoLauncherNetworkInstaller.exe
+  - iFi (by AMR) HD USB Audio Driver 3.20.exe
+  - NVIDIA_Broadcast_v1.4.0.28.exe
+  - iVCam_x64_v7.0.4.exe
+  - GeForce_Experience_v3.25.1.27.exe

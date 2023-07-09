@@ -56,3 +56,20 @@
       tags:
         - configuration
         - fonts
+
+- name: Enable windows optional feature
+  hosts: develop_windows
+  tasks:
+    - name: Enable windows optional feature
+      ansible.windows.win_optional_feature:
+        name: "{{ optional_feature.features }}"
+        state: present
+      register: win_optional_feature_status
+      tags:
+        - configuration
+
+    - name: Reboot if installing feature requires it
+      ansible.windows.win_reboot:
+      when: win_optional_feature_status.reboot_required
+      tags:
+        - configuration
