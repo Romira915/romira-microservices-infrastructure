@@ -1,0 +1,15 @@
+---
+- name: Provisioning
+  hosts: homeservers
+  roles:
+    - apt
+    - iptables
+    - user
+    - samba
+    - wireguard
+    - MySQL
+    - redis
+    - OpenLiteSpeed
+    - Nextcloud
+    - cron
+  tags: homeservers

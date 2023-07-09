@@ -1,0 +1,58 @@
+---
+- name: Provisioning
+  hosts: develop_windows
+  roles:
+    - chocolatey
+    - scoop
+    - winget
+    - bitwarden
+    - win_gh
+  tags: develop_windows
+
+- name: Ensure that deployed config file
+  hosts: develop_windows
+  tasks:
+    - name: Create symbolic link
+      ansible.windows.win_shell: "cmd /c mklink {{ item.dest }} {{ item.src }}"
+      failed_when: "'already exists' not in create_symbolic_link.stderr and create_symbolic_link.rc != 0"
+      changed_when: create_symbolic_link.rc == 0
+      register: create_symbolic_link
+      loop: "{{ configuration.symbolic_link }}"
+      tags:
+        - configuration
+
+    - name: Ensure that ssh private key is exists
+      ansible.windows.win_command:
+        argv:
+          - bw
+          - get
+          - attachment
+          - "{{ configuration.bw_ssh_private_key_attachment_name }}"
+          - --itemid
+          - "{{ configuration.bw_ssh_private_key_item_id }}"
+          - --output
+          - "C:\\Users\\{{ ansible_user }}\\.ssh\\{{ configuration.bw_ssh_private_key_attachment_name }}"
+      args:
+        stdin: "{{ bitwarden.password }}"
+      tags:
+        - configuration
+
+- name: Setup fonts file
+  hosts: develop_windows
+  tasks:
+    - name: Ensure fonts dir is exists
+      ansible.windows.win_file:
+        path: "{{ fonts.dir }}"
+        state: directory
+      tags:
+        - configuration
+        - fonts
+
+    - name: Download fonts without install
+      ansible.windows.win_get_url:
+        url: "{{ item.url }}"
+        dest: "{{ item.dest }}"
+      loop: "{{ fonts.fonts }}"
+      tags:
+        - configuration
+        - fonts

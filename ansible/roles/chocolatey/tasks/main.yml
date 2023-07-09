@@ -1,0 +1,9 @@
+---
+# tasks file for roles/chocolatey
+- name: Ensure chocolatey package is installed
+  chocolatey.chocolatey.win_chocolatey:
+    name: "{{ chocolatey.package | flatten }}"
+    state: present
+    ignore_checksums: "{{ chocolatey.ignore_checksums }}"
+  tags:
+    - chocolatey

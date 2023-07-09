@@ -1,0 +1,13 @@
+---
+# tasks file for roles/win_gh
+- name: Clone github repo
+  ansible.windows.win_shell: >-
+    $env:GH_TOKEN = '{{ win_gh.github_fine_grained_token }}';
+    gh repo clone {{ item.repo }} {{ item.dest }}
+  failed_when: "'already exists' not in gh_repo_clone.stderr and gh_repo_clone.rc != 0"
+  changed_when: gh_repo_clone.rc == 0
+  register: gh_repo_clone
+  loop: "{{ win_gh.repository }}"
+  tags:
+    - gh
+    - configuration

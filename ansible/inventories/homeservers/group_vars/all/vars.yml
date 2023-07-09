@@ -1,0 +1,126 @@
+---
+target_inventory: homeservers
+apt:
+  package:
+    - unzip
+  install_state: present
+user:
+  groups:
+    - ark
+  absent_groups: []
+  users:
+    - name: romira
+      groups:
+        - sudo
+      password: "{{ vault_user.vault_romira.vault_password }}"
+      password_salt: "{{ vault_user.vault_romira.vault_password_salt }}"
+      authorized_keys: https://github.com/Romira915.keys
+    - name: actions
+      groups:
+      password: "{{ vault_user.vault_actions.vault_password }}"
+      password_salt: "{{ vault_user.vault_actions.vault_password_salt }}"
+  absent_users: []
+samba:
+  mount_dir: /mnt/d
+  interfaces: 127.0.0.0/8 eth0 eth1 eth2 eth3 wg0
+  hosts_allow: 192.168.25.0/24 172.24.20.0/24 172.17.15.0/24
+  # hosts_allow: 0.0.0.0/0
+wg:
+  interface:
+    address: 172.24.20.1/24
+    port: "{{ vault_wg.vault_interface.vault_port }}"
+    private_key: "{{ vault_wg.vault_interface.vault_private_key }}"
+    masquerade_device_name: eth2
+    masquerade_src: 172.24.20.0/24
+  peers:
+    amd3900X:
+      public_key: 5F5a+eI0U5bwWAT3CHbZmWwbOmP+mGogHqWllO8hSAk=
+      preshared_key: "{{ vault_wg.vault_peers.vault_preshared_key }}"
+      allowd_ips: 172.24.20.2/32
+    think_pad:
+      public_key: Gnq8LjXWCIOKmMrvqrF/mceebex+mOHiBujbIi2qyVo=
+      preshared_key: "{{ vault_wg.vault_peers.vault_preshared_key }}"
+      allowd_ips: 172.24.20.3/32
+    xperia:
+      public_key: 9x2vunih+Ab3NQwky51Agqj1xn2umDGAYDmoS8kqLgo=
+      preshared_key: "{{ vault_wg.vault_peers.vault_preshared_key }}"
+      allowd_ips: 172.24.20.4/32
+    xiaoxin_pad_pro_2021:
+      public_key: rq0Iz50hVajhFnkMl0fy+/a6g9cgEWc5KLNgzeOiZQ4=
+      preshared_key: "{{ vault_wg.vault_peers.vault_preshared_key }}"
+      allowd_ips: 172.24.20.5/32
+iptables:
+  allowed_ports: "{{ vault_iptables.vault_allowed_ports }}"
+  allowed_input_interfaces:
+    - interface: eth1
+      comment: internal dev
+    - interface: eth2
+    - interface: wg0
+      comment: wireguard dev
+  allowed_forward:
+    - in_interface: wg0
+    - out_interface: wg0
+    - in_interface: eth0
+    - out_interface: eth0
+  allowed_nat: []
+openlitespeed:
+  admin:
+    user: romira
+    password: "{{ vault_openlitespeed.vault_admin.vault_password }}"
+  vhosts:
+    - name: home.cloud.romira.dev
+      root: /var/www/nextcloud/
+      user: www-data
+      group: www-data
+    - name: api.home.discord.romira.dev
+      root: /var/www/discord
+lsphp:
+  - php: lsphp82
+    package:
+      - lsphp82-common
+      - lsphp82-curl
+      - lsphp82-mysql
+      - lsphp82-opcache
+      - lsphp82-imap
+      - lsphp82-apcu
+      - lsphp82-intl
+      - lsphp82-memcached
+      - lsphp82-redis
+      - lsphp82-pear
+    lib:
+      - libsmbclient-dev
+      - zlib1g-dev
+      - pkg-config
+      - libmagickwand-dev
+    pecl:
+      package:
+        - smbclient
+        - memcache
+        - imagick
+      prompts:
+        - null
+        - (.*)Enable memcache session handler support? \[yes\]: "yes"
+        - Please provide the prefix of ImageMagick installation \[autodetect\]: "autodetect"
+mysql:
+  login_user: root
+  login_unix_socket: /run/mysqld/mysqld.sock
+  databases:
+    - nextcloud
+  users:
+    nextcloud:
+      name: nextcloud
+      password: "{{ vault_mysql.vault_users.vault_nextcloud.vault_password }}"
+      priv: nextcloud.*:ALL
+nextcloud:
+  executable_php: /usr/local/lsws/lsphp82/bin/php
+  trusted_domain: 172.17.15.3
+  database: mysql
+  database_name: nextcloud
+  database_user: "{{ mysql.users.nextcloud.name }}"
+  database_pass: "{{ vault_mysql.vault_users.vault_nextcloud.vault_password }}"
+  admin_user: romira
+  admin_pass: "{{ vault_nextcloud.vault_admin_pass }}"
+  redis_host: /var/run/redis/redis-server.sock
+  redis_port: 6379
+  apps:
+    - files_external

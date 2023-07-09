@@ -1,0 +1,7 @@
+---
+# tasks file for roles/brew
+- name: Install homebrew package
+  community.general.homebrew:
+    name: "{{ brew.package }}"
+    state: present
+    update_homebrew: yes

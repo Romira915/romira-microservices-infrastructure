@@ -1,0 +1,10 @@
+---
+- name: Provisioning
+  hosts: develop_ubuntu
+  roles:
+    - apt
+    - markosamuli.linuxbrew
+    - brew
+  vars:
+    linuxbrew_init_shell: false
+  tags: develop_ubuntu

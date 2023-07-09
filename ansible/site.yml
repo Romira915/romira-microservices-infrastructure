@@ -1,0 +1,7 @@
+---
+- name: Import playbook
+  import_playbook: homeservers.yml
+- name: Import playbook
+  import_playbook: develop_ubuntu.yml
+- name: Import playbook
+  import_playbook: develop_windows.yml
