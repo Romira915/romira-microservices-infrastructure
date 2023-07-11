@@ -5,6 +5,12 @@
     - apt
     - markosamuli.linuxbrew
     - brew
+    - bitwarden
   vars:
     linuxbrew_init_shell: false
+  tags: develop_ubuntu
+
+- name: Ensure that deployed config file
+  hosts: develop_ubuntu
+  tasks:
   tags: develop_ubuntu
