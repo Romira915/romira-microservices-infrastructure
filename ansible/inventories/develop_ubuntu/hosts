@@ -1,5 +1,5 @@
 [develop_ubuntu]
-ubuntu01
+orb
 
 [wsl]
 127.0.0.1

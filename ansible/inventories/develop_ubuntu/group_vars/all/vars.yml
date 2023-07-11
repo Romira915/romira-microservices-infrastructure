@@ -12,55 +12,7 @@ apt:
     - wakeonlan
     - keychain
   install_state: present
-brew:
-  package:
-    - git
-    - ghq
-    - pandoc
-    - pandoc-crossref
-    - maven
-    - gradle
-    - java
-    - openjdk
-    - gh
-    - terraform
-    - sqlite
-    - oci-cli
-    - go
-    - graphviz
-    - perl
-    - cpanm
-    - awscli
-    - peco
-    - fzf
-    - tmux
-    - zoxide
-    - bat
-    - ripgrep
-    - rga
-    - fd
-    - exa
-    - git-delta
-    - xh
-    - dog
-    - sk
-    - dust
-    - bottom
-    - sd
-    - cantino/mcfly/mcfly
-    - topgrade
-    - grex
-    - angle-grinder
-    - tmux-xpanes
-    - gping
-    - git-lfs
-    - starship
-    - ghostscript
-    - gnuplot
-    - php
-    - composer
-    - tfmigrate
-    - ansible
-    - ansible-lint
-    - ansible-language-server
-    - bitwarden-cli
+bitwarden:
+  server: https://vaultwarden.romira.dev
+  email_address: "{{ vault_bitwarden.vault_email_address }}"
+  password: "{{ vault_bitwarden.vault_password }}"
