@@ -1,4 +1,5 @@
 [develop_ubuntu]
+ubuntu01
 ubuntu_dev@orb
 
 [wsl]

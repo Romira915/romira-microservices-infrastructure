@@ -2,6 +2,7 @@
 # tasks file for roles/bitwarden
 - name: Gather facts
   ansible.builtin.gather_facts:
+  when: ansible_facts.system is not defined
   tags:
     - bitwarden
 
