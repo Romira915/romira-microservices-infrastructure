@@ -3,6 +3,7 @@ target_inventory: homeservers
 apt:
   package:
     - unzip
+    - qrencode
   install_state: present
 user:
   groups:
