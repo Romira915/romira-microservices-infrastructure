@@ -3,3 +3,4 @@
 gh:
   github_fine_grained_token:
   repository: []
+additional_path: /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin

@@ -1,4 +1,6 @@
 apt:
+  repositories:
+    - ppa:fish-shell/release-3
   package:
     - unzip
     - build-essential
@@ -11,6 +13,8 @@ apt:
     - cmake
     - wakeonlan
     - keychain
+    - zsh
+    - fish
   install_state: present
 bitwarden:
   server: https://vaultwarden.romira.dev
@@ -19,6 +23,8 @@ bitwarden:
 develop_configuration:
   bw_ssh_private_key_attachment_name: id_ed25519_romira_private_key
   bw_ssh_private_key_item_id: 2c5a6eeb-b1e8-4217-b0b5-4d9d69d3cf76
+  directories:
+    - ~/.config/fish/
   symbolic_links:
     - src: ~/.config/romira-s-config/git/.gitconfig
       dest: ~/.gitconfig
@@ -50,4 +56,16 @@ gh:
   github_fine_grained_token: "{{ vault_gh.vault_github_fine_grained_token }}"
   repository:
     - repo: Romira915/ssh-config
-      dest: ~/.ssh
+      dest: ~/.tmp/.ssh
+user:
+  groups: []
+  absent_groups: []
+  users:
+    - name: romira
+      groups:
+        - sudo
+      password: "{{ vault_user.vault_romira.vault_password }}"
+      password_salt: "{{ vault_user.vault_romira.vault_password_salt }}"
+      authorized_keys: https://github.com/Romira915.keys
+  absent_users: []
+additional_path: /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin

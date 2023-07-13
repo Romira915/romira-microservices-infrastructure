@@ -1,5 +1,12 @@
 # tasks file
 ---
+- name: Gather facts
+  ansible.builtin.gather_facts:
+  when: ansible_facts.distribution_release is not defined
+  tags:
+    - configuration
+    - apt
+
 - name: Update configuration file - /etc/apt/sources.list
   ansible.builtin.template:
     src: "etc/apt/sources.list.{{ ansible_distribution }}.j2"
@@ -51,6 +58,17 @@
     - configuration
     - apt
     - apt-update
+
+- name: Add repository
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  loop: "{{ apt.repositories }}"
+  become: true
+  tags:
+    - configuration
+    - apt
+    - apt-repository
 
 - name: Update
   ansible.builtin.apt:

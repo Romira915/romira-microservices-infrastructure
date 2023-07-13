@@ -2,6 +2,7 @@
 - name: Provisioning
   hosts: develop_ubuntu
   roles:
+    - user
     - apt
     - markosamuli.linuxbrew
     - brew
@@ -15,21 +16,26 @@
 - name: Ensure that deployed config file
   hosts: develop_ubuntu
   tasks:
-    - name: Clone config repogitory
-      ansible.builtin.git:
-        repo: https://github.com/Romira915/romira-s-config.git
-        dest: ~/.config/romira-s-config
-        update: true
+    - name: Gather facts
+      ansible.builtin.gather_facts:
+      when: ansible_facts.env.PATH is not defined
       tags:
         - develop_configuration
 
-    - name: Create symbolic links
+    - name: Ensure directory is exists
       ansible.builtin.file:
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
-        state: link
-        force: true
-      loop: "{{ develop_configuration.symbolic_links }}"
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      loop: "{{ develop_configuration.directories }}"
+      tags:
+        - develop_configuration
+
+    - name: Ensure that ssh config is exists
+      ansible.builtin.copy:
+        src: ~/.tmp/.ssh/
+        dest: ~/.ssh
+        remote_src: true
       tags:
         - develop_configuration
 
@@ -46,7 +52,39 @@
           - "~/.ssh/{{ develop_configuration.bw_ssh_private_key_attachment_name }}"
       args:
         stdin: "{{ bitwarden.password }}"
+      environment:
+        PATH: "{{ ansible_facts.env.PATH }}:{{ additional_path }}"
+      changed_when: false
+      tags:
+        - develop_configuration
+
+    - name: Clone config repogitory
+      ansible.builtin.git:
+        repo: git@github.com:Romira915/romira-s-config.git
+        dest: ~/.config/romira-s-config
+        update: true
+      tags:
+        - develop_configuration
+
+    - name: Create symbolic links
+      ansible.builtin.file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+        force: true
+      loop: "{{ develop_configuration.symbolic_links }}"
       tags:
         - develop_configuration
 
   tags: develop_ubuntu
+
+- name: Set login shell to fish
+  hosts: develop_ubuntu
+  tasks:
+    - name: Set login shell to fish
+      ansible.builtin.shell: chsh -s $(which fish)
+      args:
+        stdin: "{{ vault_user.vault_romira.vault_password }}"
+      changed_when: false
+  tags:
+    - develop_configuration

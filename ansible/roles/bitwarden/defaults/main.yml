@@ -4,3 +4,4 @@ bitwarden:
   server:
   email_address:
   password:
+additional_path: /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin
