@@ -26,29 +26,41 @@ samba:
   hosts_allow: 192.168.25.0/24 172.24.20.0/24 172.17.15.0/24
   # hosts_allow: 0.0.0.0/0
 wg:
+  endpoint: home.vpn.romira.dev:58560
   interface:
     address: 172.24.20.1/24
     port: "{{ vault_wg.vault_interface.vault_port }}"
     private_key: "{{ vault_wg.vault_interface.vault_private_key }}"
+    public_key: 2eW7Ujo7PiB9sa+1+xN8QBKj/NRcatnhrUkq0YFS8GI=
     masquerade_device_name: eth2
     masquerade_src: 172.24.20.0/24
+    dns: 192.168.15.1
   peers:
     amd3900X:
-      public_key: 5F5a+eI0U5bwWAT3CHbZmWwbOmP+mGogHqWllO8hSAk=
+      private_key: "{{ vault_wg.vault_peers.vault_amd3900X.vault_private_key }}"
+      public_key: foQF8YA+vEUmyODKJVmLCY+lb2dAM/IMjVzqmt/Y6SA=
       preshared_key: "{{ vault_wg.vault_peers.vault_preshared_key }}"
       allowd_ips: 172.24.20.2/32
-    think_pad:
-      public_key: Gnq8LjXWCIOKmMrvqrF/mceebex+mOHiBujbIi2qyVo=
+    m2_macbook_air:
+      private_key: "{{ vault_wg.vault_peers.vault_m2_macbook_air.vault_private_key }}"
+      public_key: 4IHPNb4LwOyDuQW0LO+0EhY0W5YAzoRS0Koi7JQxP3Q=
       preshared_key: "{{ vault_wg.vault_peers.vault_preshared_key }}"
       allowd_ips: 172.24.20.3/32
-    xperia:
-      public_key: 9x2vunih+Ab3NQwky51Agqj1xn2umDGAYDmoS8kqLgo=
+    think_pad:
+      private_key: "{{ vault_wg.vault_peers.vault_think_pad.vault_private_key }}"
+      public_key: 8CzVLIW4UpCQaIjratrwy4O2Xf+Afs1kwJOW8hlmvEY=
       preshared_key: "{{ vault_wg.vault_peers.vault_preshared_key }}"
       allowd_ips: 172.24.20.4/32
-    xiaoxin_pad_pro_2021:
-      public_key: rq0Iz50hVajhFnkMl0fy+/a6g9cgEWc5KLNgzeOiZQ4=
+    xperia:
+      private_key: "{{ vault_wg.vault_peers.vault_xperia.vault_private_key }}"
+      public_key: at4mtCjNIPUjKFR3xh8jtDJsMhWzv4vZniIQaMdi3Ds=
       preshared_key: "{{ vault_wg.vault_peers.vault_preshared_key }}"
       allowd_ips: 172.24.20.5/32
+    xiaoxin_pad_pro_2021:
+      private_key: "{{ vault_wg.vault_peers.vault_xiaoxin_pad_pro_2021.vault_private_key }}"
+      public_key: hh2RPbosr+Rl96ENz1ioR2QGD+mZ21KszxY51lP+d2U=
+      preshared_key: "{{ vault_wg.vault_peers.vault_preshared_key }}"
+      allowd_ips: 172.24.20.6/32
 iptables:
   allowed_ports: "{{ vault_iptables.vault_allowed_ports }}"
   allowed_input_interfaces:
