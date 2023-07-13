@@ -104,17 +104,17 @@ bitwarden:
   server: https://vaultwarden.romira.dev
   email_address: "{{ vault_bitwarden.vault_email_address }}"
   password: "{{ vault_bitwarden.vault_password }}"
-configuration:
+develop_configuration:
   bw_ssh_private_key_attachment_name: id_ed25519_romira_private_key
   bw_ssh_private_key_item_id: 2c5a6eeb-b1e8-4217-b0b5-4d9d69d3cf76
-  symbolic_link:
+  symbolic_links:
     - src: C:\Users\{{ ansible_user }}\.config\romira-s-config\git\.gitconfig
       dest: C:\Users\{{ ansible_user }}\.gitconfig
     - src: C:\Users\{{ ansible_user }}\.config\romira-s-config\git\.bashrc
       dest: C:\Users\{{ ansible_user }}\.bashrc
     - src: C:\Users\{{ ansible_user }}\.config\romira-s-config\git\.bash_profile
       dest: C:\Users\{{ ansible_user }}\.bash_profile
-win_gh:
+gh:
   github_fine_grained_token: "{{ vault_gh.vault_github_fine_grained_token }}"
   repository:
     - repo: Romira915/ssh-config

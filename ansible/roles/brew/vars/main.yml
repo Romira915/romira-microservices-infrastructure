@@ -1,5 +1,7 @@
 ---
 # vars file for roles/brew
+linuxbrew_install_tmp: "/tmp/linuxbrew"
+linuxbrew_install_url: "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
 brew:
   package:
     - git

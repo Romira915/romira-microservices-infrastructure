@@ -1,0 +1,5 @@
+---
+# defaults file for roles/win_gh
+gh:
+  github_fine_grained_token:
+  repository: []
