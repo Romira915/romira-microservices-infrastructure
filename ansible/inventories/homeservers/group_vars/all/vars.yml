@@ -23,13 +23,14 @@ user:
   absent_users: []
 samba:
   mount_dir: /mnt/d
-  interfaces: 127.0.0.0/8 eth0 eth1 eth2 eth3 wg0
-  hosts_allow: 192.168.25.0/24 172.24.20.0/24 172.17.15.0/24
+  interfaces: 127.0.0.0/8 wlp2s0 wg0
+  hosts_allow: 192.168.15.0/24 172.24.20.0/24
+  # hosts_allow: 192.168.15.0/24 172.24.20.0/24 172.17.15.0/24
   # hosts_allow: 0.0.0.0/0
 wg:
   endpoint: home.vpn.romira.dev:58560
   interface:
-    address: 172.24.20.1/24
+    address: 172.24.20.1
     port: "{{ vault_wg.vault_interface.vault_port }}"
     private_key: "{{ vault_wg.vault_interface.vault_private_key }}"
     public_key: 2eW7Ujo7PiB9sa+1+xN8QBKj/NRcatnhrUkq0YFS8GI=
@@ -65,17 +66,15 @@ wg:
 iptables:
   allowed_ports: "{{ vault_iptables.vault_allowed_ports }}"
   allowed_input_interfaces:
-    - interface: eth1
+    - interface: enxc436c0ea26ff
       comment: internal dev
-    - interface: eth2
     - interface: wg0
       comment: wireguard dev
   allowed_forward:
     - in_interface: wg0
     - out_interface: wg0
-    - in_interface: eth0
-    - out_interface: eth0
-  allowed_nat: []
+  allowed_nat:
+    - source: 172.24.20.0/24
 openlitespeed:
   admin:
     user: romira
@@ -126,7 +125,7 @@ mysql:
       priv: nextcloud.*:ALL
 nextcloud:
   executable_php: /usr/local/lsws/lsphp82/bin/php
-  trusted_domain: 172.17.15.3
+  trusted_domain: 192.168.15.240
   database: mysql
   database_name: nextcloud
   database_user: "{{ mysql.users.nextcloud.name }}"

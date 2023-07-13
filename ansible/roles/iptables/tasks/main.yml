@@ -1,21 +1,21 @@
 ---
 # ルールを全てリセットしたい場合は以下をコメントアウトする．
-# - name: Accept input packet unmatched in rule
-#   ansible.builtin.iptables:
-#     chain: INPUT
-#     policy: ACCEPT
-#   become: true
-#   tags:
-#     - iptables
+- name: Accept input packet unmatched in rule
+  ansible.builtin.iptables:
+    chain: INPUT
+    policy: ACCEPT
+  become: true
+  tags:
+    - iptables
 
-# - name: Flush iptables
-#   ansible.builtin.iptables:
-#     table: "{{ item }}"
-#     flush: true
-#   become: true
-#   loop: [filter, nat, mangle, raw, security]
-#   tags:
-#     - iptables
+- name: Flush iptables
+  ansible.builtin.iptables:
+    table: "{{ item }}"
+    flush: true
+  become: true
+  loop: [filter, nat, mangle, raw, security]
+  tags:
+    - iptables
 
 - name: Allow related and established connections
   ansible.builtin.iptables:
