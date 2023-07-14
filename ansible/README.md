@@ -1,8 +1,15 @@
 # Ansible
 
-# develop_windows
+## develop_ubuntu
 
-## Setup for windows
+1. Install require asnible galaxy
+   ```shell
+   ansible-galaxy install markosamuli.linuxbrew andrewrothstein.rust andrewrothstein.miniconda
+   ```
+
+## develop_windows
+
+### Setup for windows
 
 1. Setup WinRM.
     ```powershell
