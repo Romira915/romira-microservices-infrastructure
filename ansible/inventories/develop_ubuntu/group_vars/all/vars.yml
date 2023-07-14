@@ -1,3 +1,5 @@
+is_wsl: false
+windows_user: romira
 apt:
   repositories:
     - ppa:fish-shell/release-3
@@ -15,6 +17,7 @@ apt:
     - keychain
     - zsh
     - fish
+    - ttf-mscorefonts-installer
   install_state: present
 bitwarden:
   server: https://vaultwarden.romira.dev
@@ -25,6 +28,9 @@ develop_configuration:
   bw_ssh_private_key_item_id: 2c5a6eeb-b1e8-4217-b0b5-4d9d69d3cf76
   directories:
     - ~/.config/fish/
+    - ~/.config/mcfly/
+    - ~/.local/bin/
+    - ~/workspace/repositories
   symbolic_links:
     - src: ~/.config/romira-s-config/git/.gitconfig
       dest: ~/.gitconfig
@@ -52,6 +58,17 @@ develop_configuration:
       dest: ~/.condarc
     - src: ~/.config/romira-s-config/zsh/.git-prompt.sh
       dest: ~/.git-prompt.sh
+    - src: ~/.config/romira-s-config/mcfly/mcfly.fish
+      dest: ~/.config/mcfly/mcfly.fish
+  wsl_symbolic_links:
+    - src: /mnt/c/Windows/System32/clip.exe
+      dest: ~/.local/bin/clip
+    - src: /mnt/c/Users/{{ windows_user }}/AppData/Local/Programs/Microsoft VS Code/bin/code
+      dest: ~/.local/bin/code
+    - src: /mnt/c/Windows/explorer.exe
+      dest: ~/.local/bin/explorer
+    - src: /mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe
+      dest: ~/.local/bin/msedge
 gh:
   github_fine_grained_token: "{{ vault_gh.vault_github_fine_grained_token }}"
   repository:
@@ -68,4 +85,7 @@ user:
       password_salt: "{{ vault_user.vault_romira.vault_password_salt }}"
       authorized_keys: https://github.com/Romira915.keys
   absent_users: []
-additional_path: /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin
+additional_path: /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$HOME.cargo/bin
+miniconda_parent_dir: /home/romira
+miniconda_link_subdir: miniconda3
+miniconda_escalate: false

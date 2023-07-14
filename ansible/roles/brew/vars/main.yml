@@ -54,3 +54,5 @@ brew:
     - ansible-lint
     - ansible-language-server
     - bitwarden-cli
+    - azure-cli
+    - volta
