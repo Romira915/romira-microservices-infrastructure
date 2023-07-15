@@ -17,10 +17,12 @@
     - configuration
 
 - name: Clone github repo
-  ansible.builtin.shell: ssh -o StrictHostKeyChecking=no github.com; gh repo clone {{ item.repo }} {{ item.dest }}
+  ansible.builtin.shell: gh repo clone {{ item.repo }} {{ item.dest }}
   environment:
     GH_TOKEN: "{{ gh.github_fine_grained_token }}"
     PATH: "{{ ansible_facts.env.PATH }}:{{ additional_path }}"
+  args:
+    stdin: "yes"
   failed_when: "'already exists' not in gh_repo_clone.stderr and gh_repo_clone.rc != 0"
   changed_when: gh_repo_clone.rc == 0
   register: gh_repo_clone

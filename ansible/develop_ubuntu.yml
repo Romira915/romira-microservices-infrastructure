@@ -65,6 +65,10 @@
         repo: git@github.com:Romira915/romira-s-config.git
         dest: ~/.config/romira-s-config
         update: true
+        accept_hostkey: true
+      environment:
+        SSHPASS: "{{ develop_configuration.ssh_passphrase }}"
+        GIT_SSH_COMMAND: sshpass -P "Enter passphrase for key" ssh
       tags:
         - develop_configuration
 

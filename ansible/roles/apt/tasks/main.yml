@@ -87,6 +87,7 @@
     name: "{{ apt.dependencies }}"
     state: "{{ apt.install_state }}"
   become: true
+  when: apt.dependencies is defined
   tags:
     - configuration
     - apt
@@ -98,6 +99,7 @@
     state: present
   loop: "{{ apt.repositories }}"
   become: true
+  when: apt.repositories is defined
   tags:
     - configuration
     - apt
