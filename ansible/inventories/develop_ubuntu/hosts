@@ -1,6 +1,7 @@
 [develop_ubuntu]
 ubuntu01
 ubuntu_dev@orb
+lxc-ubuntu01
 
 [wsl]
 127.0.0.1

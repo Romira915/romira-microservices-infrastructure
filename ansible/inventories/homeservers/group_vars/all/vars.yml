@@ -4,6 +4,7 @@ apt:
   package:
     - unzip
     - qrencode
+    - iptables-persistent
   install_state: present
 user:
   groups:

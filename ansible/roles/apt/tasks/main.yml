@@ -59,17 +59,6 @@
     - apt
     - apt-update
 
-- name: Add repository
-  apt_repository:
-    repo: "{{ item }}"
-    state: present
-  loop: "{{ apt.repositories }}"
-  become: true
-  tags:
-    - configuration
-    - apt
-    - apt-repository
-
 - name: Update
   ansible.builtin.apt:
     update_cache: true
@@ -95,13 +84,24 @@
 
 - name: Install dependencies # noqa args[module]
   ansible.builtin.apt:
-    name: "{{ apt_dependencies }}"
-    state: "{{ apt_install_state }}"
+    name: "{{ apt.dependencies }}"
+    state: "{{ apt.install_state }}"
   become: true
   tags:
     - configuration
     - apt
     - apt-dependencies
+
+- name: Add repository
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  loop: "{{ apt.repositories }}"
+  become: true
+  tags:
+    - configuration
+    - apt
+    - apt-repository
 
 - name: Upgrade # noqa args[module]
   ansible.builtin.apt:
