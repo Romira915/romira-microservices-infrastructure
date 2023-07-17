@@ -89,18 +89,18 @@ resource "cloudflare_record" "vaultwarden" {
   proxied         = true
 }
 
-resource "cloudflare_record" "misskey" {
-  name    = "misskey"
+resource "cloudflare_record" "want-this" {
+  name    = "want-this"
   value   = "138.2.19.89"
   type    = "A"
   zone_id = data.cloudflare_zone.romira_dev.id
 
   allow_overwrite = false
-  proxied         = false
+  proxied         = true
 }
 
-resource "cloudflare_record" "want-this" {
-  name    = "want-this"
+resource "cloudflare_record" "misskey" {
+  name    = "misskey"
   value   = "138.2.19.89"
   type    = "A"
   zone_id = data.cloudflare_zone.romira_dev.id
