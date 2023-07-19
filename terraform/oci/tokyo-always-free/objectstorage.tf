@@ -35,3 +35,14 @@ resource "oci_objectstorage_bucket" "image-bucket" {
     "Oracle-Tags.CreatedOn"                                                               = "2021-09-13T05:47:35.884Z"
   }
 }
+
+
+resource "oci_objectstorage_bucket" "vaultwarden-backup" {
+  compartment_id = var.compartment_id
+  name           = "vaultwarden-backup"
+  namespace      = data.oci_objectstorage_namespace.romira_namespace.namespace
+
+  defined_tags = {
+    "${oci_identity_tag_namespace.romira_tags.name}.${oci_identity_tag.always_free.name}" = "${oci_identity_tag.always_free.validator[0].values[0]}"
+  }
+}
