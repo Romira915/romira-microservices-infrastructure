@@ -56,3 +56,8 @@ brew:
     - bitwarden-cli
     - azure-cli
     - volta
+    - pyenv
+    - poetry
+    - youtube-dl
+    - ffmpeg
+    - tree
