@@ -10,6 +10,15 @@
     - apt
     - apt-install
 
+- name: Ensure wg-quick@wg0 enabled
+  ansible.builtin.systemd:
+    name: wg-quick@wg0
+    enabled: true
+  become: true
+  tags:
+    - wireguard
+    - systemd
+
 - name: Ensure net.ipv4.ip_forward enabled
   ansible.posix.sysctl:
     name: net.ipv4.ip_forward
@@ -36,11 +45,29 @@
     - configuration
     - template
 
-- name: Ensure wg-quick@wg0 enabled
-  ansible.builtin.systemd:
-    name: wg-quick@wg0
-    enabled: true
+- name: Ensure peers directory exists
+  ansible.builtin.file:
+    path: /etc/wireguard/peers
+    owner: root
+    group: root
+    state: directory
+    mode: "0744"
   become: true
   tags:
     - wireguard
-    - systemd
+    - configuration
+    - file
+
+- name: Ensure peer.conf exists
+  ansible.builtin.template:
+    src: peer.conf
+    dest: /etc/wireguard/peers/{{ item.key }}.conf
+    owner: root
+    group: root
+    mode: "0644"
+  become: true
+  with_dict: "{{ wg.peers }}"
+  tags:
+    - wireguard
+    - configuration
+    - template

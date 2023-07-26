@@ -1,5 +1,12 @@
 # tasks file
 ---
+- name: Gather facts
+  ansible.builtin.gather_facts:
+  when: ansible_facts.distribution_release is not defined
+  tags:
+    - configuration
+    - apt
+
 - name: Update configuration file - /etc/apt/sources.list
   ansible.builtin.template:
     src: "etc/apt/sources.list.{{ ansible_distribution }}.j2"
@@ -77,13 +84,26 @@
 
 - name: Install dependencies # noqa args[module]
   ansible.builtin.apt:
-    name: "{{ apt_dependencies }}"
-    state: "{{ apt_install_state }}"
+    name: "{{ apt.dependencies }}"
+    state: "{{ apt.install_state }}"
   become: true
+  when: apt.dependencies is defined
   tags:
     - configuration
     - apt
     - apt-dependencies
+
+- name: Add repository
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  loop: "{{ apt.repositories }}"
+  become: true
+  when: apt.repositories is defined
+  tags:
+    - configuration
+    - apt
+    - apt-repository
 
 - name: Upgrade # noqa args[module]
   ansible.builtin.apt:

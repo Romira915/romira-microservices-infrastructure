@@ -36,10 +36,19 @@ resource "oci_objectstorage_bucket" "image-bucket" {
   }
 }
 
-
 resource "oci_objectstorage_bucket" "vaultwarden-backup" {
   compartment_id = var.compartment_id
   name           = "vaultwarden-backup"
+  namespace      = data.oci_objectstorage_namespace.romira_namespace.namespace
+
+  defined_tags = {
+    "${oci_identity_tag_namespace.romira_tags.name}.${oci_identity_tag.always_free.name}" = "${oci_identity_tag.always_free.validator[0].values[0]}"
+  }
+}
+
+resource "oci_objectstorage_bucket" "misskey-backup" {
+  compartment_id = var.compartment_id
+  name           = "misskey-backup"
   namespace      = data.oci_objectstorage_namespace.romira_namespace.namespace
 
   defined_tags = {

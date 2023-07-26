@@ -1,13 +1,15 @@
 ---
-# tasks file for roles/bitwarden
+# tasks file for roles/gh
 - name: Gather facts
   ansible.builtin.gather_facts:
   when: ansible_facts.system is not defined
   tags:
-    - bitwarden
+    - gh
 
-- import_tasks: unix_bitwarden.yml
+- name: Import task
+  ansible.builtin.import_tasks: unix_gh.yml
   when: ansible_facts.system in ['Linux', 'Darwin']
 
-- import_tasks: win_bitwarden.yml
+- name: Import task
+  ansible.builtin.import_tasks: win_gh.yml
   when: ansible_facts.system == 'Windows'
