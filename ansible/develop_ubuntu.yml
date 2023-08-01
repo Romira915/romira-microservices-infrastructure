@@ -84,6 +84,25 @@
 
   tags: develop_ubuntu
 
+- name: Set up zsh
+  hosts: develop_ubuntu
+  tasks:
+    - name: Clone zprezto repogitory
+      ansible.builtin.git:
+        repo: https://github.com/sorin-ionescu/prezto.git
+        dest: ~/.zprezto
+        update: true
+
+    - name: Create symbolic links for zprezto
+      ansible.builtin.file:
+        src: "~/.zprezto/runcoms/{{ item }}"
+        dest: "~/.{{ item }}"
+        state: link
+        force: true
+      loop: [zlogin, zlogout, zprofile, zshenv]
+  tags:
+    - develop_configuration
+
 - name: Set login shell to fish
   hosts: develop_ubuntu
   tasks:
