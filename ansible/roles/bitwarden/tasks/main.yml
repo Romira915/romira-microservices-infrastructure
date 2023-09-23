@@ -10,4 +10,4 @@
   when: ansible_facts.system in ['Linux', 'Darwin']
 
 - import_tasks: win_bitwarden.yml
-  when: ansible_facts.system == 'Windows'
+  when: ansible_facts.system in ['Win32NT']

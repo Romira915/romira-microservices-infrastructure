@@ -1,5 +1,7 @@
 [develop_windows]
 172.17.15.5
+172.23.224.1
+172.18.214.5
 
 [develop_windows:vars]
 ansible_user=romira

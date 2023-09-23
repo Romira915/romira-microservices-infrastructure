@@ -66,6 +66,7 @@
         dest: ~/.config/romira-s-config
         update: true
         accept_hostkey: true
+        key_file: "~/.ssh/{{ develop_configuration.bw_ssh_private_key_attachment_name }}"
       environment:
         SSHPASS: "{{ develop_configuration.ssh_passphrase }}"
         GIT_SSH_COMMAND: sshpass -P "Enter passphrase for key" ssh

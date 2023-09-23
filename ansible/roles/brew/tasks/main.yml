@@ -27,8 +27,16 @@
 #     state: absent
 #   become: false
 
+# - name: Install homebrew package
+#   community.general.homebrew:
+#     name: "{{ brew.package }}"
+#     state: present
+#     update_homebrew: true
+
 - name: Install homebrew package
   community.general.homebrew:
-    name: "{{ brew.package }}"
+    name: "{{ item }}"
     state: present
     update_homebrew: true
+  loop: "{{ brew.package }}"
+  when: brew.package is iterable

@@ -13,7 +13,7 @@ chocolatey:
     - wireshark
     - docker-desktop
     - authy-desktop
-    - googlejapaneseinput
+    # - googlejapaneseinput
     - eartrumpet
     - vivaldi
     - microsoft-teams
@@ -97,6 +97,8 @@ winget:
     - BlueStack.BlueStacks
     - Microsoft.VisualStudio.2022.Community
     - DMM.GamePlayer
+    # Adobe Creative Cloud
+    - XPDLPKWG9SW2WD
   override_package:
     - name: Microsoft.VisualStudioCode
       override: /mergetasks=addcontextmenufiles,addcontextmenufolders,!runcode /lang=english /verysilent

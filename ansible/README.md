@@ -24,6 +24,6 @@
 1. Disable firewall or allow 5986 port.
 1. Execute ansible-playbook.
    ```shell
-   ansible-playbook --diff -i inventories/develop_windows/hosts site.yml
+   ansible-playbook --diff -i inventories/develop_windows/hosts site.yml --limit ${WINDOWS_HOSTNAME}
    ```
 1. Enable firewall.

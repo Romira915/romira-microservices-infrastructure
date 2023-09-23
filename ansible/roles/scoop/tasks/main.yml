@@ -17,8 +17,16 @@
   tags:
     - scoop
 
+# - name: Ensure scoop package is installed
+#   community.windows.win_scoop:
+#     name: "{{ scoop.package }}"
+#   tags:
+#     - scoop
+
 - name: Ensure scoop package is installed
   community.windows.win_scoop:
-    name: "{{ scoop.package }}"
+    name: "{{ item }}"
+  loop: "{{ scoop.package }}"
+  when: scoop.package is iterable
   tags:
     - scoop

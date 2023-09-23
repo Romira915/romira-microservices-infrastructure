@@ -74,6 +74,8 @@ develop_configuration:
       dest: ~/.git-prompt.sh
     - src: ~/.config/romira-s-config/mcfly/mcfly.fish
       dest: ~/.config/mcfly/mcfly.fish
+    - src: ~/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent/bw_add_sshkeys
+      dest: ~/.local/bin/bw_add_sshkeys
   wsl_symbolic_links:
     - src: /mnt/c/Windows/System32/clip.exe
       dest: ~/.local/bin/clip
@@ -82,12 +84,14 @@ develop_configuration:
     - src: /mnt/c/Windows/explorer.exe
       dest: ~/.local/bin/explorer
     - src: /mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe
-      dest: ~/.local/bin/msedge
+      dest: ~/.local/bin/msedgela
 gh:
   github_fine_grained_token: "{{ vault_gh.vault_github_fine_grained_token }}"
   repository:
     - repo: Romira915/ssh-config
       dest: ~/.tmp/.ssh
+    - repo: joaojacome/bitwarden-ssh-agent
+      dest: ~/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent
 user:
   groups: []
   absent_groups: []
@@ -99,7 +103,7 @@ user:
       password_salt: "{{ vault_user.vault_romira.vault_password_salt }}"
       authorized_keys: https://github.com/Romira915.keys
   absent_users: []
-additional_path: /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$HOME/.cargo/bin
+additional_path: /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/romira/.cargo/bin
 miniconda_parent_dir: /home/romira
 miniconda_link_subdir: miniconda3
 miniconda_escalate: false
