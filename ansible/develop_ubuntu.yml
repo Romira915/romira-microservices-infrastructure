@@ -55,7 +55,7 @@
       args:
         stdin: "{{ bitwarden.password }}"
       environment:
-        PATH: "{{ ansible_facts.env.PATH }}:{{ additional_path }}"
+        PATH: "{{ additional_path }}:{{ ansible_facts.env.PATH }}"
       changed_when: false
       tags:
         - develop_configuration
@@ -165,7 +165,7 @@
       args:
         chdir: ~/.tmux/plugins/tmux-thumbs
       environment:
-        PATH: "{{ ansible_facts.env.PATH }}:{{ additional_path }}"
+        PATH: "{{ additional_path }}:{{ ansible_facts.env.PATH }}"
       changed_when: false
       tags:
         - develop_configuration
