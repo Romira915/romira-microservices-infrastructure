@@ -68,8 +68,8 @@
         accept_hostkey: true
         key_file: "~/.ssh/{{ develop_configuration.bw_ssh_private_key_attachment_name }}"
       environment:
-        SSHPASS: "{{ develop_configuration.ssh_passphrase }}"
-        GIT_SSH_COMMAND: sshpass -P "Enter passphrase for key" ssh
+#        SSHPASS: "{{ develop_configuration.ssh_passphrase }}"
+#        GIT_SSH_COMMAND: "sshpass -P 'Enter passphrase for key' ssh"
       tags:
         - develop_configuration
 
@@ -177,7 +177,7 @@
   tasks:
     - name: Create a symbolic link for wsl.conf
       ansible.builtin.file:
-        src: "~/.config/romira-s-config/Ubuntu/wsl.conf"
+        src: "/home/romira/.config/romira-s-config/Ubuntu/wsl.conf"
         dest: /etc/wsl.conf
         state: link
         owner: root
@@ -193,7 +193,7 @@
         dest: "{{ item.dest }}"
         state: link
         force: true
-      become: true
+      become: false
       loop: "{{ develop_configuration.wsl_symbolic_links }}"
       when: is_wsl
       tags:

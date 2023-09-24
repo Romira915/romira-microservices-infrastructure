@@ -1,4 +1,4 @@
-is_wsl: false
+is_wsl: true
 windows_user: romira
 apt:
   dependencies:
@@ -74,17 +74,17 @@ develop_configuration:
       dest: ~/.git-prompt.sh
     - src: ~/.config/romira-s-config/mcfly/mcfly.fish
       dest: ~/.config/mcfly/mcfly.fish
-    - src: ~/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent/bw_add_sshkeys
+    - src: ~/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent/bw_add_sshkeys.py
       dest: ~/.local/bin/bw_add_sshkeys
   wsl_symbolic_links:
     - src: /mnt/c/Windows/System32/clip.exe
-      dest: ~/.local/bin/clip
+      dest: /home/romira/.local/bin/clip
     - src: /mnt/c/Users/{{ windows_user }}/AppData/Local/Programs/Microsoft VS Code/bin/code
-      dest: ~/.local/bin/code
+      dest: /home/romira/.local/bin/code
     - src: /mnt/c/Windows/explorer.exe
-      dest: ~/.local/bin/explorer
+      dest: /home/romira/.local/bin/explorer
     - src: /mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe
-      dest: ~/.local/bin/msedgela
+      dest: /home/romira/.local/bin/msedgela
 gh:
   github_fine_grained_token: "{{ vault_gh.vault_github_fine_grained_token }}"
   repository:

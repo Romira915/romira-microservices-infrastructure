@@ -13,7 +13,7 @@ chocolatey:
     - wireshark
     - docker-desktop
     - authy-desktop
-    # - googlejapaneseinput
+    - googlejapaneseinput
     - eartrumpet
     - vivaldi
     - microsoft-teams
@@ -116,6 +116,9 @@ develop_configuration:
       dest: C:\Users\{{ ansible_user }}\.bashrc
     - src: C:\Users\{{ ansible_user }}\.config\romira-s-config\git\.bash_profile
       dest: C:\Users\{{ ansible_user }}\.bash_profile
+  hard_links:
+    - src: C:\Users\{{ ansible_user }}\.config\romira-s-config\WindowsTerminal\settings.json
+      dest: C:\Users\{{ ansible_user }}\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
 gh:
   github_fine_grained_token: "{{ vault_gh.vault_github_fine_grained_token }}"
   repository:
@@ -138,7 +141,7 @@ fonts:
       dest: C:\Users\{{ ansible_user }}\.tmp\fonts\Noto_Serif_JP.zip
 optional_feature:
   features:
-    - Microsoft-Hyper-V-All
+    - HypervisorPlatform
     - Microsoft-Windows-Subsystem-Linux
   #  - Containers-DisposableClientVM
 # TODO: get_url installer

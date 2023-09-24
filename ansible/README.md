@@ -6,6 +6,10 @@
    ```shell
    ansible-galaxy install markosamuli.linuxbrew andrewrothstein.rust andrewrothstein.miniconda
    ```
+1. Execute ansible-playbook.
+   ```shell
+   ansible-playbook --diff -i inventories/develop_ubuntu/hosts site.yml --limit ${UBUNTU_HOSTNAME} --connection local
+   ```
 
 ## develop_windows
 
