@@ -1,5 +1,5 @@
 is_wsl: true
-user: romira
+setup_user: romira
 windows_user: romira
 apt:
   dependencies:
@@ -42,69 +42,69 @@ develop_configuration:
   bw_ssh_private_key_item_id: 2c5a6eeb-b1e8-4217-b0b5-4d9d69d3cf76
   ssh_passphrase: "{{ vault_develop_configuration.vault_ssh_passphrase }}"
   directories:
-    - "/home/{{ user }}/.config/fish/"
-    - "/home/{{ user }}/.config/mcfly/"
-    - "/home/{{ user }}/.local/bin/"
-    - "/home/{{ user }}/workspace/repositories"
+    - "/home/{{ setup_user }}/.config/fish/"
+    - "/home/{{ setup_user }}/.config/mcfly/"
+    - "/home/{{ setup_user }}/.local/bin/"
+    - "/home/{{ setup_user }}/workspace/repositories"
   symbolic_links:
-    - src: "/home/{{ user }}/.config/romira-s-config/git/.gitconfig"
-      dest: "/home/{{ user }}/.gitconfig"
-    - src: "/home/{{ user }}/.config/romira-s-config/shell/.profile"
-      dest: "/home/{{ user }}/.profile"
-    - src: "/home/{{ user }}/.config/romira-s-config/fish/config.fish"
-      dest: "/home/{{ user }}/.config/fish/config.fish"
-    - src: "/home/{{ user }}/.config/romira-s-config/zsh/.zshrc"
-      dest: "/home/{{ user }}/.zshrc"
-    - src: "/home/{{ user }}/.config/romira-s-config/zsh/.zpreztorc"
-      dest: "/home/{{ user }}/.zpreztorc"
-    - src: "/home/{{ user }}/.config/romira-s-config/git/.bashrc"
-      dest: "/home/{{ user }}/.bashrc"
-    - src: "/home/{{ user }}/.config/romira-s-config/git/.bash_profile"
-      dest: "/home/{{ user }}/.bash_profile"
-    - src: "/home/{{ user }}/.config/romira-s-config/vim/.vim"
-      dest: "/home/{{ user }}/.vim"
-    - src: "/home/{{ user }}/.config/romira-s-config/vim/.vimrc"
-      dest: "/home/{{ user }}/.vimrc"
-    - src: "/home/{{ user }}/.config/romira-s-config/tmux/.tmux.conf"
-      dest: "/home/{{ user }}/.tmux.conf"
-    - src: "/home/{{ user }}/.config/romira-s-config/latex/.latexmkrc"
-      dest: "/home/{{ user }}/.latexmkrc"
-    - src: "/home/{{ user }}/.config/romira-s-config/miniconda3/.condarc"
-      dest: "/home/{{ user }}/.condarc"
-    - src: "/home/{{ user }}/.config/romira-s-config/zsh/.git-prompt.sh"
-      dest: "/home/{{ user }}/.git-prompt.sh"
-    - src: "/home/{{ user }}/.config/romira-s-config/mcfly/mcfly.fish"
-      dest: "/home/{{ user }}/.config/mcfly/mcfly.fish"
-    - src: "/home/{{ user }}/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent/bw_add_sshkeys.py"
-      dest: "/home/{{ user }}/.local/bin/bw_add_sshkeys"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/git/.gitconfig"
+      dest: "/home/{{ setup_user }}/.gitconfig"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/shell/.profile"
+      dest: "/home/{{ setup_user }}/.profile"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/fish/config.fish"
+      dest: "/home/{{ setup_user }}/.config/fish/config.fish"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/zsh/.zshrc"
+      dest: "/home/{{ setup_user }}/.zshrc"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/zsh/.zpreztorc"
+      dest: "/home/{{ setup_user }}/.zpreztorc"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/git/.bashrc"
+      dest: "/home/{{ setup_user }}/.bashrc"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/git/.bash_profile"
+      dest: "/home/{{ setup_user }}/.bash_profile"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/vim/.vim"
+      dest: "/home/{{ setup_user }}/.vim"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/vim/.vimrc"
+      dest: "/home/{{ setup_user }}/.vimrc"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/tmux/.tmux.conf"
+      dest: "/home/{{ setup_user }}/.tmux.conf"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/latex/.latexmkrc"
+      dest: "/home/{{ setup_user }}/.latexmkrc"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/miniconda3/.condarc"
+      dest: "/home/{{ setup_user }}/.condarc"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/zsh/.git-prompt.sh"
+      dest: "/home/{{ setup_user }}/.git-prompt.sh"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/mcfly/mcfly.fish"
+      dest: "/home/{{ setup_user }}/.config/mcfly/mcfly.fish"
+    - src: "/home/{{ setup_user }}/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent/bw_add_sshkeys.py"
+      dest: "/home/{{ setup_user }}/.local/bin/bw_add_sshkeys"
   wsl_symbolic_links:
     - src: /mnt/c/Windows/System32/clip.exe
-      dest: "/home/{{ user }}/.local/bin/clip"
-    - src: /mnt/c/Users/{{ windows_user }}/AppData/Local/Programs/Microsoft VS Code/bin/code
-      dest: "/home/{{ user }}/.local/bin/code"
+      dest: "/home/{{ setup_user }}/.local/bin/clip"
+    - src: "/mnt/c/Users/{{ windows_user }}/AppData/Local/Programs/Microsoft VS Code/bin/code"
+      dest: "/home/{{ setup_user }}/.local/bin/code"
     - src: /mnt/c/Windows/explorer.exe
-      dest: "/home/{{ user }}/.local/bin/explorer"
+      dest: "/home/{{ setup_user }}/.local/bin/explorer"
     - src: /mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe
-      dest: "/home/{{ user }}/.local/bin/msedge"
+      dest: "/home/{{ setup_user }}/.local/bin/msedge"
 gh:
   github_fine_grained_token: "{{ vault_gh.vault_github_fine_grained_token }}"
   repository:
     - repo: Romira915/ssh-config
-      dest: "/home/{{ user }}/.tmp/.ssh"
+      dest: "/home/{{ setup_user }}/.tmp/.ssh"
     - repo: joaojacome/bitwarden-ssh-agent
-      dest: "/home/{{ user }}/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent"
+      dest: "/home/{{ setup_user }}/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent"
 user:
   groups: []
   absent_groups: []
   users:
-    - name: "{{ user }}"
+    - name: "{{ setup_user }}"
       groups:
         - sudo
       password: "{{ vault_user.vault_romira.vault_password }}"
       password_salt: "{{ vault_user.vault_romira.vault_password_salt }}"
       authorized_keys: https://github.com/Romira915.keys
   absent_users: []
-additional_path: "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/{{ user }}/.cargo/bin"
-miniconda_parent_dir: "/home/{{ user }}"
+additional_path: "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/{{ setup_user }}/.cargo/bin"
+miniconda_parent_dir: "/home/{{ setup_user }}"
 miniconda_link_subdir: miniconda3
 miniconda_escalate: false
