@@ -62,6 +62,7 @@ chocolatey:
     - vb-cable
     - lghub
     - epicgameslauncher
+    - valorant
     - "{{ vault_chocolatey.vault_package }}"
 scoop:
   bucket:
