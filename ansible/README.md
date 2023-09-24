@@ -1,5 +1,12 @@
 # Ansible
 
+## Common setup
+
+1. create .vault-password-file
+   ```shell
+   echo "${VAULT_PASSWORD} > .vault-password-file
+   ```
+
 ## develop_ubuntu
 
 1. Install require asnible galaxy
@@ -8,7 +15,7 @@
    ```
 1. Execute ansible-playbook.
    ```shell
-   ansible-playbook --diff -i inventories/develop_ubuntu/hosts site.yml --limit ${UBUNTU_HOSTNAME} --connection local
+   ansible-playbook --diff -i inventories/develop_ubuntu/hosts site.yml --limit 127.0.0.1 --connection local
    ```
 
 ## develop_windows

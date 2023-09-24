@@ -84,7 +84,7 @@ develop_configuration:
     - src: /mnt/c/Windows/explorer.exe
       dest: /home/romira/.local/bin/explorer
     - src: /mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe
-      dest: /home/romira/.local/bin/msedgela
+      dest: /home/romira/.local/bin/msedge
 gh:
   github_fine_grained_token: "{{ vault_gh.vault_github_fine_grained_token }}"
   repository:
