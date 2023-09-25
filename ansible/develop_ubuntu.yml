@@ -60,18 +60,18 @@
       tags:
         - develop_configuration
 
-    - name: Clone config repogitory
-      ansible.builtin.git:
-        repo: git@github.com:Romira915/romira-s-config.git
-        dest: ~/.config/romira-s-config
-        update: true
-        accept_hostkey: true
-        key_file: "~/.ssh/{{ develop_configuration.bw_ssh_private_key_attachment_name }}"
-      environment:
-#        SSHPASS: "{{ develop_configuration.ssh_passphrase }}"
-       GIT_SSH_COMMAND: "sshpass -p {{ develop_configuration.ssh_passphrase }} -P 'Enter passphrase for key' ssh"
-      tags:
-        - develop_configuration
+#     - name: Clone config repogitory
+#       ansible.builtin.git:
+#         repo: git@github.com:Romira915/romira-s-config.git
+#         dest: ~/.config/romira-s-config
+#         update: true
+#         accept_hostkey: true
+#         key_file: "~/.ssh/{{ develop_configuration.bw_ssh_private_key_attachment_name }}"
+#       environment:
+# #        SSHPASS: "{{ develop_configuration.ssh_passphrase }}"
+#        GIT_SSH_COMMAND: "sshpass -p {{ develop_configuration.ssh_passphrase }} -P 'Enter passphrase for key' ssh"
+#       tags:
+#         - develop_configuration
 
     - name: Create symbolic links
       ansible.builtin.file:
