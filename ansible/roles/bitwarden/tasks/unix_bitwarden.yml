@@ -4,6 +4,8 @@
   community.general.homebrew:
     name: bitwarden-cli
     state: present
+  environment:
+    PATH: "{{ additional_path }}:{{ ansible_facts.env.PATH }}"
   tags:
     - bitwarden
 
