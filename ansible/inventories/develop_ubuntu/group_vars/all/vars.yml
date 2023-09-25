@@ -95,6 +95,10 @@ gh:
       dest: "/home/{{ setup_user }}/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent"
     - repo: Romira915/romira-s-config
       dest: "/home/{{ setup_user }}/.config/romira-s-config"
+    - repo: sorin-ionescu/prezto
+      dest: "/home/{{ setup_user }}/.zprezto"
+    - repo: fcsonline/tmux-thumbs
+      dest: "/home/{{ setup_user }}/.tmux/plugins/tmux-thumbs"
 user:
   groups: []
   absent_groups: []

@@ -60,6 +60,8 @@
       tags:
         - develop_configuration
 
+# パスフレーズ付きだと上手く行かないのでghでcloneしている
+# TODO: ssh-agentを使う前提でgit moduleを使うか検討する
 #     - name: Clone config repogitory
 #       ansible.builtin.git:
 #         repo: git@github.com:Romira915/romira-s-config.git
@@ -68,7 +70,7 @@
 #         accept_hostkey: true
 #         key_file: "~/.ssh/{{ develop_configuration.bw_ssh_private_key_attachment_name }}"
 #       environment:
-# #        SSHPASS: "{{ develop_configuration.ssh_passphrase }}"
+#        SSHPASS: "{{ develop_configuration.ssh_passphrase }}"
 #        GIT_SSH_COMMAND: "sshpass -p {{ develop_configuration.ssh_passphrase }} -P 'Enter passphrase for key' ssh"
 #       tags:
 #         - develop_configuration
@@ -88,11 +90,11 @@
 - name: Set up zsh
   hosts: develop_ubuntu
   tasks:
-    - name: Clone zprezto repogitory
-      ansible.builtin.git:
-        repo: https://github.com/sorin-ionescu/prezto.git
-        dest: ~/.zprezto
-        update: true
+    # - name: Clone zprezto repogitory
+    #   ansible.builtin.git:
+    #     repo: https://github.com/sorin-ionescu/prezto.git
+    #     dest: ~/.zprezto
+    #     update: true
 
     - name: Create symbolic links for zprezto
       ansible.builtin.file:
@@ -152,13 +154,13 @@
 - name: Set up tmux-thumbs
   hosts: develop_ubuntu
   tasks:
-    - name: Clone tmux-thumbs repogitory
-      ansible.builtin.git:
-        repo: https://github.com/fcsonline/tmux-thumbs
-        dest: ~/.tmux/plugins/tmux-thumbs
-        update: true
-      tags:
-        - develop_configuration
+    # - name: Clone tmux-thumbs repogitory
+    #   ansible.builtin.git:
+    #     repo: https://github.com/fcsonline/tmux-thumbs
+    #     dest: ~/.tmux/plugins/tmux-thumbs
+    #     update: true
+    #   tags:
+    #     - develop_configuration
 
     - name: Build tmux-thumbs
       ansible.builtin.command: cargo build --release
