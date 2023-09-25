@@ -5,6 +5,8 @@
     name: gh
     state: present
     update_homebrew: true
+  environment:
+    PATH: "{{ additional_path }}:{{ ansible_facts.env.PATH }}"
   tags:
     - gh
     - configuration
