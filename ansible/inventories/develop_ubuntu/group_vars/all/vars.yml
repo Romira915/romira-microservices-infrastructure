@@ -93,7 +93,7 @@ gh:
       dest: "/home/{{ setup_user }}/.tmp/.ssh"
     - repo: joaojacome/bitwarden-ssh-agent
       dest: "/home/{{ setup_user }}/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent"
-    - repo: Romira915/romira-s-config.git
+    - repo: Romira915/romira-s-config
       dest: "/home/{{ setup_user }}/.config/romira-s-config"
 user:
   groups: []
