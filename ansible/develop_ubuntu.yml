@@ -69,7 +69,7 @@
         key_file: "~/.ssh/{{ develop_configuration.bw_ssh_private_key_attachment_name }}"
       environment:
 #        SSHPASS: "{{ develop_configuration.ssh_passphrase }}"
-#        GIT_SSH_COMMAND: "sshpass -P 'Enter passphrase for key' ssh"
+       GIT_SSH_COMMAND: "sshpass -p {{ develop_configuration.ssh_passphrase }} -P 'Enter passphrase for key' ssh"
       tags:
         - develop_configuration
 
