@@ -48,7 +48,6 @@ chocolatey:
     - steam
     - musicbee
     - ubisoft-connect
-    - uplay
     - obs
     - audacity
     - blender
@@ -63,6 +62,7 @@ chocolatey:
     - lghub
     - epicgameslauncher
     - valorant
+    - ea-app
     - "{{ vault_chocolatey.vault_package }}"
 scoop:
   bucket:
