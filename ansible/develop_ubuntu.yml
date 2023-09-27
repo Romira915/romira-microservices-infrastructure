@@ -143,6 +143,7 @@
         decors/fish-ghq
         yoshiori/fish-peco_select_ghq_repository
         tsu-nera/fish-peco_recentd
+        halostatue/fish-docker
       args:
         executable: /usr/bin/fish
       changed_when: false
