@@ -143,9 +143,10 @@ fonts:
       dest: C:\Users\{{ ansible_user }}\.tmp\fonts\Noto_Serif_JP.zip
 optional_feature:
   features:
+    - Microsoft-Hyper-V-All
     - HypervisorPlatform
     - Microsoft-Windows-Subsystem-Linux
-  #  - Containers-DisposableClientVM
+    - Containers-DisposableClientVM
 # TODO: get_url installer
 package:
   - REALFORCE CONNECT Software Setup_3-2-0.exe

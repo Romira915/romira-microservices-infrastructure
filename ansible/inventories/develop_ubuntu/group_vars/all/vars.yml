@@ -57,9 +57,9 @@ develop_configuration:
       dest: "/home/{{ setup_user }}/.zshrc"
     - src: "/home/{{ setup_user }}/.config/romira-s-config/zsh/.zpreztorc"
       dest: "/home/{{ setup_user }}/.zpreztorc"
-    - src: "/home/{{ setup_user }}/.config/romira-s-config/git/.bashrc"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/bash/.bashrc"
       dest: "/home/{{ setup_user }}/.bashrc"
-    - src: "/home/{{ setup_user }}/.config/romira-s-config/git/.bash_profile"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/bash/.bash_profile"
       dest: "/home/{{ setup_user }}/.bash_profile"
     - src: "/home/{{ setup_user }}/.config/romira-s-config/vim/.vim"
       dest: "/home/{{ setup_user }}/.vim"
@@ -111,6 +111,6 @@ user:
       authorized_keys: https://github.com/Romira915.keys
   absent_users: []
 additional_path: "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/{{ setup_user }}/.cargo/bin"
-miniconda_parent_dir: "/home/{{ setup_user }}"
-miniconda_link_subdir: miniconda3
+miniconda_parent_dir: "/home/{{ setup_user }}/.local/share"
+miniconda_link_subdir: ../../.miniconda3
 miniconda_escalate: false
