@@ -63,6 +63,7 @@ chocolatey:
     - epicgameslauncher
     - valorant
     - ea-app
+    - elevenclock
     - "{{ vault_chocolatey.vault_package }}"
 scoop:
   bucket:
