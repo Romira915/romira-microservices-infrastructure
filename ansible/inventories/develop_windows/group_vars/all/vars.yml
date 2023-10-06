@@ -64,6 +64,7 @@ chocolatey:
     - valorant
     - ea-app
     - elevenclock
+    - alt-tab-terminator
     - "{{ vault_chocolatey.vault_package }}"
 scoop:
   bucket:
