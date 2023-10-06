@@ -8,6 +8,7 @@ apt:
     - gnupg
     - libbz2-dev
     - libfuse2
+    - librust-zip+deflate-zlib-dev
   repositories:
     - ppa:fish-shell/release-3
   package:
