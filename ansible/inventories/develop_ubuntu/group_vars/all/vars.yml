@@ -9,6 +9,7 @@ apt:
     - libbz2-dev
     - libfuse2
     - librust-zip+deflate-zlib-dev
+    - g++-aarch64-linux-gnu
   repositories:
     - ppa:fish-shell/release-3
   package:
