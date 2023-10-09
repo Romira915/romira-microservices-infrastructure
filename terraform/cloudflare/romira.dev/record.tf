@@ -109,14 +109,14 @@ resource "cloudflare_record" "misskey" {
   proxied         = true
 }
 
-resource "cloudflare_record" "api-comiketer" {
-  name    = "api.comiketer"
+resource "cloudflare_record" "comiketer" {
+  name    = "comiketer"
   value   = "138.2.19.89"
   type    = "A"
   zone_id = data.cloudflare_zone.romira_dev.id
 
   allow_overwrite = false
-  proxied         = false
+  proxied         = true
 }
 
 resource "cloudflare_record" "_05295d161c46149e048ecadbac759e27_digital-dragons" {
