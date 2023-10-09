@@ -109,6 +109,16 @@ resource "cloudflare_record" "misskey" {
   proxied         = true
 }
 
+resource "cloudflare_record" "api-comiketer" {
+  name    = "api.comiketer"
+  value   = "138.2.19.89"
+  type    = "A"
+  zone_id = data.cloudflare_zone.romira_dev.id
+
+  allow_overwrite = false
+  proxied         = false
+}
+
 resource "cloudflare_record" "_05295d161c46149e048ecadbac759e27_digital-dragons" {
   name    = "_05295d161c46149e048ecadbac759e27.digital-dragons"
   value   = "_ccf3a28b26eabca0664e6dd35cec50f7.kdbplsmznr.acm-validations.aws"
