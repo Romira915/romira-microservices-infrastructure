@@ -1,7 +1,7 @@
 resource "oci_core_vcn" "ampere_vcn" {
   display_name   = "ampere-vcn"
   compartment_id = var.compartment_id
-  cidr_blocks    = ["172.16.0.0/20"]
+  cidr_blocks    = ["172.20.0.0/20"]
   dns_label      = "ampere"
 
   defined_tags = {
@@ -89,7 +89,7 @@ resource "oci_core_security_list" "security_list_for_ampere" {
 
 resource "oci_core_subnet" "public_ampere_subnet" {
   vcn_id         = oci_core_vcn.ampere_vcn.id
-  cidr_block     = "172.16.0.0/24"
+  cidr_block     = "172.20.0.0/24"
   compartment_id = var.compartment_id
   display_name   = "public ampere subnet"
   dns_label      = "public"
