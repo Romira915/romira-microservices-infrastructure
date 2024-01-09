@@ -17,7 +17,6 @@ apt:
     - file
     - git
     - lldb
-    - tor
     - cmake
     - wakeonlan
     - keychain
