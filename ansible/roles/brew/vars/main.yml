@@ -58,7 +58,6 @@ brew:
     - volta
     - pyenv
     - poetry
-    - youtube-dl
     - ffmpeg
     - tree
     - yt-dlp
