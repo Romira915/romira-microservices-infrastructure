@@ -1,12 +1,7 @@
-terraform {
-  required_providers {
-    oci = {
-      source  = "oracle/oci"
-      version = "5.27.0"
-    }
-  }
+data "terraform_remote_state" "tokyo_always_free" {
+  backend = "s3"
 
-  backend "s3" {
+  config = {
     bucket                      = "terraform-backend"
     key                         = "tokyo-always-free/terraform.tfstate"
     profile                     = "oci_s3"

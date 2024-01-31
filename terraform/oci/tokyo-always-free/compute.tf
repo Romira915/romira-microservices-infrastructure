@@ -4,7 +4,7 @@ resource "oci_core_instance" "ampere_instance" {
   compartment_id      = var.compartment_id
   shape               = "VM.Standard.A1.Flex"
 
-  display_name = "ampere-instance"
+  display_name = "ampere-instance-01"
 
   fault_domain = "FAULT-DOMAIN-3"
 
@@ -97,16 +97,14 @@ resource "oci_core_instance" "e2_1_micro_01_instance" {
 
   create_vnic_details {
     assign_public_ip          = true
-    subnet_id                 = oci_core_subnet.public_app_subnet.id
-    assign_private_dns_record = false
+    subnet_id                 = oci_core_subnet.public_ampere_subnet.id
+    assign_private_dns_record = true
     defined_tags = {
-      "Oracle-Tags.CreatedBy"                                                               = "oracleidentitycloudservice/y.tanaka0915@gmail.com"
-      "Oracle-Tags.CreatedOn"                                                               = "2021-09-07T09:13:16.434Z"
       "${oci_identity_tag_namespace.romira_tags.name}.${oci_identity_tag.always_free.name}" = "${oci_identity_tag.always_free.validator[0].values[0]}"
     }
-    display_name           = "app-instance"
+    display_name           = "e2-1-micro-01-instance"
     freeform_tags          = {}
-    hostname_label         = "app-instance"
+    hostname_label         = "e2-1-micro-01-instance"
     nsg_ids                = []
     private_ip             = "172.16.0.248"
     skip_source_dest_check = false
@@ -120,26 +118,48 @@ resource "oci_core_instance" "e2_1_micro_01_instance" {
     boot_volume_type                    = "PARAVIRTUALIZED"
     firmware                            = "UEFI_64"
     is_consistent_volume_naming_enabled = true
-    is_pv_encryption_in_transit_enabled = false
     network_type                        = "PARAVIRTUALIZED"
     remote_data_volume_type             = "PARAVIRTUALIZED"
   }
 
   shape_config {
     memory_in_gbs = 1
-    nvmes         = 0
     ocpus         = 1
   }
 
   source_details {
-    boot_volume_size_in_gbs = "47"
+    boot_volume_size_in_gbs = "50"
     boot_volume_vpus_per_gb = "10"
-    source_id               = var.ubuntu_20_04_minimal_2021_07_19_0
+    source_id               = var.ubuntu_22_04_Minimal_2023_10_15_0
     source_type             = "image"
   }
 
   defined_tags = {
     "${oci_identity_tag_namespace.romira_tags.name}.${oci_identity_tag.always_free.name}" = "${oci_identity_tag.always_free.validator[0].values[0]}"
+  }
+
+  metadata = {
+    # "ssh_authorized_keys" = file(var.ssh_public_key_path)
+    "user_data" = base64encode(join("\n", [
+      "#cloud-config",
+      yamlencode({
+        timezone : "Asia/Tokyo",
+        package_update : true,
+        package_upgrade : true,
+        packages : [
+          "iptables-persistent",
+        ],
+        runcmd : [
+          "curl https://github.com/Romira915.keys >> /home/ubuntu/.ssh/authorized_keys",
+          format("/bin/sed -i -e \"s/#Port 22/Port %d/\" /etc/ssh/sshd_config", var.instance_ssh_port),
+          format("/bin/sed -i -e \"s/-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT/-A INPUT -p tcp -m state --state NEW -m tcp --dport %d -j ACCEPT/\" /etc/iptables/rules.v4", var.instance_ssh_port),
+          ["systemctl", "restart", "ssh"],
+          ["systemctl", "restart", "sshd"],
+          "iptables-restore < /etc/iptables/rules.v4",
+        ],
+      }),
+      ]
+    ))
   }
 
   lifecycle {

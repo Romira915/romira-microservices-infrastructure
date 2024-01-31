@@ -22,6 +22,12 @@ variable "ubuntu_20_04_minimal_2021_07_19_0" {
   default     = "ocid1.image.oc1.ap-tokyo-1.aaaaaaaaymes4ncljbztzxnf5bchyc7ag4oumbh5nwxt2wrbxfyycdngc6yq"
 }
 
+variable "ubuntu_22_04_Minimal_2023_10_15_0" {
+  description = "Canonical-Ubuntu-22.04-Minimal-2023.10.15-0"
+  type        = string
+  default     = "ocid1.image.oc1.ap-tokyo-1.aaaaaaaaifle6j3per4xl7e4zpcdius454hud4rubcgyldrll7vj3jmguffa"
+}
+
 variable "instance_ssh_port" {
   type    = number
   default = 22
