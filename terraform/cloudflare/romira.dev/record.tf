@@ -215,4 +215,12 @@ resource "cloudflare_record" "home_game" {
   proxied         = false
 }
 
+resource "cloudflare_record" "atproto" {
+  name    = "_atproto"
+  value   = "did=did:plc:olexjetrerhh33nxps5t6rfk"
+  type    = "TXT"
+  zone_id = data.cloudflare_zone.romira_dev.id
 
+  allow_overwrite = false
+  proxied         = false
+}
