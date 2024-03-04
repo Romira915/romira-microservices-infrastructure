@@ -101,6 +101,7 @@ lsphp:
       - lsphp82-memcached
       - lsphp82-redis
       - lsphp82-pear
+      - lsphp82-imagick
     lib:
       - libsmbclient-dev
       - zlib1g-dev
