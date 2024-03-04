@@ -38,3 +38,10 @@
    ansible-playbook --diff -i inventories/develop_windows/hosts site.yml --limit ${WINDOWS_HOSTNAME}
    ```
 1. Enable firewall.
+
+## homeserver
+
+1. Execute ansible-playbook.
+   ```shell
+   ansible-playbook --diff -i inventories/homeservers/hosts site.yml --limit home
+   ```

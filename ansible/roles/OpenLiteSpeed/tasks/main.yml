@@ -188,3 +188,16 @@
   tags:
     - openlitespeed
     - template
+
+- name: Ensure that mime.properties file exists
+  ansible.builtin.template:
+    src: mime.properties
+    dest: "{{ openlitespeed_dir }}/conf/mime.properties"
+    owner: lsadm
+    group: nogroup
+    mode: "0750"
+  become: true
+  notify: Reload openlitespeed
+  tags:
+    - openlitespeed
+    - template

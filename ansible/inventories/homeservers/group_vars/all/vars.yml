@@ -5,6 +5,7 @@ apt:
     - unzip
     - qrencode
     - iptables-persistent
+    - cron
   install_state: present
 user:
   groups:
@@ -133,7 +134,8 @@ nextcloud:
   database_pass: "{{ vault_mysql.vault_users.vault_nextcloud.vault_password }}"
   admin_user: romira
   admin_pass: "{{ vault_nextcloud.vault_admin_pass }}"
-  redis_host: /var/run/redis/redis-server.sock
+  redis_host: localhost
   redis_port: 6379
   apps:
     - files_external
+  maintenance_window_start: 14

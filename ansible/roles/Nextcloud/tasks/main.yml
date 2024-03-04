@@ -126,3 +126,15 @@
   changed_when: command_result.rc != 0
   tags:
     - nextcloud
+
+- name: Ensure that maintenance_window_start is set
+  ansible.builtin.command:
+    cmd: >-
+      su -c "{{ nextcloud.executable_php }} occ config:system:set maintenance_window_start --type=integer --value={{ nextcloud.maintenance_window_start }}"
+      -s /bin/bash www-data
+    chdir: /var/www/nextcloud
+  become: true
+  register: command_result
+  changed_when: command_result.rc != 0
+  tags:
+    - nextcloud

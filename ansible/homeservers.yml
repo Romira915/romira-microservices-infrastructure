@@ -12,4 +12,5 @@
     - OpenLiteSpeed
     - Nextcloud
     - cron
+    - docker
   tags: homeservers
