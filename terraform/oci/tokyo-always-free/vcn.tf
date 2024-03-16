@@ -78,6 +78,15 @@ resource "oci_core_security_list" "security_list_for_ampere" {
       min = var.rdp_port
     }
   }
+  ingress_security_rules {
+    protocol    = "6"
+    source      = "0.0.0.0/0"
+    description = "Minecarft port"
+    tcp_options {
+      max = 25565
+      min = 25565
+    }
+  }
   egress_security_rules {
     protocol    = "all"
     destination = "0.0.0.0/0"
