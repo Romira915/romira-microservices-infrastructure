@@ -43,5 +43,5 @@
 
 1. Execute ansible-playbook.
    ```shell
-   ansible-playbook --diff -i inventories/homeservers/hosts site.yml --limit home
+   ansible-playbook --diff -i inventories/homeserver/hosts site.yml --limit home
    ```

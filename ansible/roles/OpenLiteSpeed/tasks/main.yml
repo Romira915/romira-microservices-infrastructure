@@ -163,7 +163,7 @@
 
 - name: Ensure that vhosts config file exists
   ansible.builtin.template:
-    src: "vhosts/{{ item.name }}/vhconf.conf"
+    src: "inventories/{{ target_inventory }}/templates/openlitespeed/conf/vhosts/{{ item.name }}/vhconf.conf"
     dest: "{{ openlitespeed_dir }}/conf/vhosts/{{ item.name }}/vhconf.conf"
     owner: lsadm
     group: nogroup
@@ -177,7 +177,7 @@
 
 - name: Ensure that openlitespeed config file exists
   ansible.builtin.template:
-    src: httpd_config.conf
+    src: conf/httpd_config.conf
     dest: "{{ openlitespeed_dir }}/conf/httpd_config.conf"
     owner: lsadm
     group: nogroup
@@ -190,8 +190,8 @@
     - template
 
 - name: Ensure that mime.properties file exists
-  ansible.builtin.template:
-    src: mime.properties
+  ansible.builtin.copy:
+    src: conf/mime.properties
     dest: "{{ openlitespeed_dir }}/conf/mime.properties"
     owner: lsadm
     group: nogroup
@@ -200,4 +200,3 @@
   notify: Reload openlitespeed
   tags:
     - openlitespeed
-    - template

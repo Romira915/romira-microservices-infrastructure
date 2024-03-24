@@ -1,5 +1,5 @@
 ---
-target_inventory: homeservers
+target_inventory: homeserver
 apt:
   package:
     - unzip
@@ -111,11 +111,11 @@ lsphp:
       package:
         - smbclient
         - memcache
-        - imagick
+        # - imagick
       prompts:
         - null
         - (.*)Enable memcache session handler support? \[yes\]: "yes"
-        - Please provide the prefix of ImageMagick installation \[autodetect\]: "autodetect"
+        # - Please provide the prefix of ImageMagick installation \[autodetect\]: "autodetect"
 mysql:
   login_user: root
   login_unix_socket: /run/mysqld/mysqld.sock

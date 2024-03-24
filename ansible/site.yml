@@ -1,6 +1,8 @@
 ---
 - name: Import playbook
-  import_playbook: homeservers.yml
+  import_playbook: homeserver.yml
+- name: Import playbook
+  import_playbook: wakaba.yml
 - name: Import playbook
   import_playbook: develop_ubuntu.yml
 - name: Import playbook
