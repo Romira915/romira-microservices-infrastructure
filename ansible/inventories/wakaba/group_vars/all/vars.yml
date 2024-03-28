@@ -7,6 +7,7 @@ apt:
     - iptables-persistent
     - cron
     - jq
+    - certbot
   install_state: present
 user:
   users:
