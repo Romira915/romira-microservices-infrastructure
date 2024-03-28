@@ -1,6 +1,6 @@
 ---
 - name: Provisioning
-  hosts: wakaba01
+  hosts: wakaba
   roles:
     - apt
     - iptables
@@ -14,4 +14,4 @@
     - cron
     - docker
     - scripts
-  tags: wakaba01
+  tags: wakaba

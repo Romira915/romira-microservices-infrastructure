@@ -224,3 +224,43 @@ resource "cloudflare_record" "atproto" {
   allow_overwrite = false
   proxied         = false
 }
+
+resource "cloudflare_record" "wakaba_cloud_A" {
+  name    = "wakaba.cloud"
+  value   = "223.132.3.241"
+  type    = "A"
+  zone_id = data.cloudflare_zone.romira_dev.id
+
+  allow_overwrite = false
+  proxied         = false
+}
+
+resource "cloudflare_record" "wakaba_cloud_AAAA" {
+  name    = "wakaba.cloud"
+  value   = "240d:1a:fb7:6900:a916:e195:7e64:7152"
+  type    = "AAAA"
+  zone_id = data.cloudflare_zone.romira_dev.id
+
+  allow_overwrite = false
+  proxied         = false
+}
+
+resource "cloudflare_record" "wakaba_vpn_A" {
+  name    = "wakaba.vpn"
+  value   = "223.132.3.241"
+  type    = "A"
+  zone_id = data.cloudflare_zone.romira_dev.id
+
+  allow_overwrite = false
+  proxied         = false
+}
+
+resource "cloudflare_record" "wakaba_vpn_AAAA" {
+  name    = "wakaba.vpn"
+  value   = "240d:1a:fb7:6900:a916:e195:7e64:7152"
+  type    = "AAAA"
+  zone_id = data.cloudflare_zone.romira_dev.id
+
+  allow_overwrite = false
+  proxied         = false
+}
