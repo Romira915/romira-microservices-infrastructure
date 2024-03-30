@@ -235,15 +235,15 @@ resource "cloudflare_record" "wakaba_cloud_A" {
   proxied         = false
 }
 
-resource "cloudflare_record" "wakaba_cloud_AAAA" {
-  name    = "wakaba.cloud"
-  value   = "240d:1a:fb7:6900:a916:e195:7e64:7152"
-  type    = "AAAA"
-  zone_id = data.cloudflare_zone.romira_dev.id
+# resource "cloudflare_record" "wakaba_cloud_AAAA" {
+#   name    = "wakaba.cloud"
+#   value   = "240d:1a:fb7:6900:a916:e195:7e64:7152"
+#   type    = "AAAA"
+#   zone_id = data.cloudflare_zone.romira_dev.id
 
-  allow_overwrite = false
-  proxied         = false
-}
+#   allow_overwrite = false
+#   proxied         = false
+# }
 
 resource "cloudflare_record" "wakaba_vpn_A" {
   name    = "wakaba.vpn"
@@ -255,12 +255,12 @@ resource "cloudflare_record" "wakaba_vpn_A" {
   proxied         = false
 }
 
-resource "cloudflare_record" "wakaba_vpn_AAAA" {
-  name    = "wakaba.vpn"
-  value   = "240d:1a:fb7:6900:a916:e195:7e64:7152"
-  type    = "AAAA"
-  zone_id = data.cloudflare_zone.romira_dev.id
+# resource "cloudflare_record" "wakaba_vpn_AAAA" {
+#   name    = "wakaba.vpn"
+#   value   = "240d:1a:fb7:6900:a916:e195:7e64:7152"
+#   type    = "AAAA"
+#   zone_id = data.cloudflare_zone.romira_dev.id
 
-  allow_overwrite = false
-  proxied         = false
-}
+#   allow_overwrite = false
+#   proxied         = false
+# }
