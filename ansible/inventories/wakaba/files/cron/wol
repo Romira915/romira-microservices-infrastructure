@@ -8,5 +8,5 @@ SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 # m h dom mon dow user	command
-@reboot /usr/sbin/ethtool -s enp3s0f1 wol g
+@reboot /usr/sbin/ethtool -s enp3s0 wol g
 #
