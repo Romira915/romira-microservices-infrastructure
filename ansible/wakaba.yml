@@ -1,6 +1,6 @@
 ---
 - name: Provisioning
-  hosts: wakaba
+  hosts: wakaba_group
   roles:
     - apt
     - iptables
