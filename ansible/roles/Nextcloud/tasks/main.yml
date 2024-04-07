@@ -29,7 +29,6 @@
     group: www-data
     remote_src: true
   become: true
-
   when: "'installed: true' not in check_nextcloud_status.stdout"
   tags:
     - nextcloud
@@ -43,7 +42,8 @@
       --database-user='{{ nextcloud.database_user }}' 
       --database-pass='{{ nextcloud.database_pass }}' 
       --admin-user='{{ nextcloud.admin_user }}' 
-      --admin-pass='{{ nextcloud.admin_pass }}'"
+      --admin-pass='{{ nextcloud.admin_pass }}'
+      --data-dir='{{ nextcloud.data_dir }}'"
       -s /bin/bash www-data
     chdir: /var/www/nextcloud
   become: true
@@ -54,7 +54,7 @@
 - name: Ensure that trusted_domains is set
   ansible.builtin.command:
     cmd: >-
-      su -c "{{ nextcloud.executable_php }} occ config:system:set trusted_domains 2 --value={{ nextcloud.trusted_domain }}"
+      su -c "{{ nextcloud.executable_php }} occ config:system:set trusted_domains 1 --value={{ nextcloud.trusted_domain }}"
       -s /bin/bash www-data
     chdir: /var/www/nextcloud
   become: true
