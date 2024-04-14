@@ -8,6 +8,7 @@ apt:
     - cron
     - jq
     - certbot
+    - hd-idle
   install_state: present
 user:
   users:

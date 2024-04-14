@@ -1,13 +1,5 @@
 ---
 # tasks file for roles/Nextcloud
-- name: Download nextcloud archive
-  ansible.builtin.get_url:
-    url: https://download.nextcloud.com/server/releases/latest.tar.bz2
-    dest: /tmp/nextcloud_latest.tar.bz2
-    mode: "0644"
-  tags:
-    - nextcloud
-
 - name: Check if nextcloud is installed
   ansible.builtin.command:
     cmd: >-
@@ -17,7 +9,17 @@
   become: true
   changed_when: false
   failed_when: false
+  check_mode: false
   register: check_nextcloud_status
+  tags:
+    - nextcloud
+
+- name: Download nextcloud archive
+  ansible.builtin.get_url:
+    url: https://download.nextcloud.com/server/releases/latest.tar.bz2
+    dest: /tmp/nextcloud_latest.tar.bz2
+    mode: "0644"
+  when: "'installed: true' not in check_nextcloud_status.stdout"
   tags:
     - nextcloud
 
