@@ -7,11 +7,5 @@
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-# m h dom mon dow user	command
-# 8時まで
-# 0 3 * * 1-5 root rtcwake -m off -s 18000
-# 11時まで
-# 0 9 * * 6-7 root rtcwake -m off -s 7200
-# 毎日 8時まで
-0 3 * * 1-5 root bash /usr/local/etc/autopoweroff.sh
+@reboot root /usr/sbin/hdparm -S 242 /dev/disk/by-id/wwn-0x3038518000024300
 #
