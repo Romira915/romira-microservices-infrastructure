@@ -1,5 +1,5 @@
 ---
-- name: Provisioning
+- name: Provisioning from roles
   hosts: wakaba_group
   roles:
     - apt
@@ -14,4 +14,14 @@
     - cron
     - docker
     - scripts
+  tags: wakaba
+
+- name: Provisioning from tasks
+  hosts: wakaba_group
+  tasks:
+    - name: Ensure that timezone is set to JST
+      community.general.timezone:
+        name: Asia/Tokyo
+      become: true
+      tags: timezone
   tags: wakaba
