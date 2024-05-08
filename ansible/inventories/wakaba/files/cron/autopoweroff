@@ -13,5 +13,5 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # 11時まで
 # 0 9 * * 6-7 root rtcwake -m off -s 7200
 # 毎日 8時まで
-0 3 * * 1-5 root bash /usr/local/etc/autopoweroff.sh
+0 3 * * 1-5 root bash /usr/local/etc/autopoweroff.sh -m mem
 #
