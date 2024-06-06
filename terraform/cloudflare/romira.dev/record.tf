@@ -225,6 +225,16 @@ resource "cloudflare_record" "atproto" {
   proxied         = false
 }
 
+resource "cloudflare_record" "blog_TXT" {
+  name    = "blog"
+  value   = "google-site-verification=InZeDXEu17AyByzP_Vu3tQM2yG4IbOUrebPdZTRoQkc"
+  type    = "TXT"
+  zone_id = data.cloudflare_zone.romira_dev.id
+
+  allow_overwrite = false
+  proxied         = false
+}
+
 resource "cloudflare_record" "wakaba_cloud_A" {
   name    = "wakaba.cloud"
   value   = "223.132.3.241"
