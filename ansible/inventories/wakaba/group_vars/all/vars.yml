@@ -64,6 +64,11 @@ wg:
       public_key: hh2RPbosr+Rl96ENz1ioR2QGD+mZ21KszxY51lP+d2U=
       preshared_key: "{{ vault_wg.vault_peers.vault_preshared_key }}"
       allowd_ips: 172.24.28.6/32
+    ipad_air_11inch_m2:
+      private_key: "{{ vault_wg.vault_peers.vault_ipad_air_11inch_m2.vault_private_key }}"
+      public_key: zn4jZHKxsKz4grB4O3e/VpHa4Ioai6hqmHaoWJaTIVw=
+      preshared_key: "{{ vault_wg.vault_peers.vault_preshared_key }}"
+      allowd_ips: 172.24.28.7/32
 iptables:
   allowed_ports: "{{ vault_iptables.vault_allowed_ports }}"
   allowed_input_interfaces:
