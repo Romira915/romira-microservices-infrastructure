@@ -87,6 +87,15 @@ resource "oci_core_security_list" "security_list_for_ampere" {
       min = 25565
     }
   }
+  ingress_security_rules {
+    protocol    = "6"
+    source      = "0.0.0.0/0"
+    description = "Minecarft rcon port"
+    tcp_options {
+      max = 25575
+      min = 25575
+    }
+  }
   egress_security_rules {
     protocol    = "all"
     destination = "0.0.0.0/0"
