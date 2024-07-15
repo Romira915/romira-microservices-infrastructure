@@ -9,6 +9,7 @@ apt:
     - jq
     - certbot
     - hd-idle
+    - smartmontools
   install_state: present
 user:
   users:
