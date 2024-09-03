@@ -115,10 +115,17 @@
     - openlitespeed
     - pear
 
+- name: Set PHP version fact
+  ansible.builtin.set_fact:
+    php_version: "{{ item.php | regex_replace('^lsphp', '') | regex_replace('([0-9])([0-9])$', '\\1.\\2') }}"
+  loop: "{{ lsphp }}"
+  tags:
+    - openlitespeed
+
 - name: Copy lsphp php.ini file
   ansible.builtin.copy:
     src: "{{ item.php }}/php.ini"
-    dest: "{{ openlitespeed_dir }}/{{ item.php }}/etc/php/8.3/litespeed/php.ini"
+    dest: "{{ openlitespeed_dir }}/{{ item.php }}/etc/php/{{ php_version }}/litespeed/php.ini"
   become: true
   loop: "{{ lsphp }}"
   notify: Restart lsphp (Detached mode)
@@ -128,7 +135,7 @@
 - name: Copy lsphp mods ini file
   ansible.builtin.copy:
     src: "{{ item.php }}/mods-available/"
-    dest: "{{ openlitespeed_dir }}/{{ item.php }}/etc/php/8.3/mods-available/"
+    dest: "{{ openlitespeed_dir }}/{{ item.php }}/etc/php/{{ php_version }}/mods-available/"
   become: true
   loop: "{{ lsphp }}"
   notify: Restart lsphp (Detached mode)
