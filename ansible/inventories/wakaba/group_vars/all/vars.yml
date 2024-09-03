@@ -70,6 +70,11 @@ wg:
       public_key: zn4jZHKxsKz4grB4O3e/VpHa4Ioai6hqmHaoWJaTIVw=
       preshared_key: "{{ vault_wg.vault_peers.vault_preshared_key }}"
       allowd_ips: 172.24.28.7/32
+    galaxy_z_fold6:
+      private_key: "{{ vault_wg.vault_peers.vault_galaxy_z_fold6.vault_private_key }}"
+      public_key: yuscxAreUNPAATQnuTudm0UxR+2PJW3voFMOT4QzNG0=
+      preshared_key: "{{ vault_wg.vault_peers.vault_preshared_key }}"
+      allowd_ips: 172.24.28.8/32
 iptables:
   allowed_ports: "{{ vault_iptables.vault_allowed_ports }}"
   allowed_input_interfaces:
@@ -94,19 +99,19 @@ openlitespeed:
       user: www-data
       group: www-data
 lsphp:
-  - php: lsphp82
+  - php: lsphp83
     package:
-      - lsphp82-common
-      - lsphp82-curl
-      - lsphp82-mysql
-      - lsphp82-opcache
-      - lsphp82-imap
-      - lsphp82-apcu
-      - lsphp82-intl
-      - lsphp82-memcached
-      - lsphp82-redis
-      - lsphp82-pear
-      - lsphp82-imagick
+      - lsphp83-common
+      - lsphp83-curl
+      - lsphp83-mysql
+      - lsphp83-opcache
+      - lsphp83-imap
+      - lsphp83-apcu
+      - lsphp83-intl
+      - lsphp83-memcached
+      - lsphp83-redis
+      - lsphp83-pear
+      - lsphp83-imagick
     lib:
       - libsmbclient-dev
       - zlib1g-dev

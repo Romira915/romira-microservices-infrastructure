@@ -118,7 +118,7 @@
 - name: Copy lsphp php.ini file
   ansible.builtin.copy:
     src: "{{ item.php }}/php.ini"
-    dest: "{{ openlitespeed_dir }}/{{ item.php }}/etc/php/8.2/litespeed/php.ini"
+    dest: "{{ openlitespeed_dir }}/{{ item.php }}/etc/php/8.3/litespeed/php.ini"
   become: true
   loop: "{{ lsphp }}"
   notify: Restart lsphp (Detached mode)
@@ -128,7 +128,7 @@
 - name: Copy lsphp mods ini file
   ansible.builtin.copy:
     src: "{{ item.php }}/mods-available/"
-    dest: "{{ openlitespeed_dir }}/{{ item.php }}/etc/php/8.2/mods-available/"
+    dest: "{{ openlitespeed_dir }}/{{ item.php }}/etc/php/8.3/mods-available/"
   become: true
   loop: "{{ lsphp }}"
   notify: Restart lsphp (Detached mode)
