@@ -29,7 +29,7 @@ brew:
     - ripgrep
     - rga
     - fd
-    - exa
+    - eza
     - git-delta
     - xh
     - dog
@@ -37,7 +37,7 @@ brew:
     - dust
     - bottom
     - sd
-    - cantino/mcfly/mcfly
+    - mcfly
     - topgrade
     - grex
     - angle-grinder

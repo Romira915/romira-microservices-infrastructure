@@ -28,12 +28,11 @@ apt:
     - fish
     - ttf-mscorefonts-installer
     - sshpass
-    - fcitx-bin
-    - fcitx-mozc
     - dbus-x11
     - language-pack-ja
     - nautilus
     - apache2-utils
+    - fcitx5-mozc
   install_state: present
 bitwarden:
   server: https://vaultwarden.romira.dev
