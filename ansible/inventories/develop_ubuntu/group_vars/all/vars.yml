@@ -12,6 +12,7 @@ apt:
     - g++-aarch64-linux-gnu
   repositories:
     - ppa:fish-shell/release-3
+    - ppa:ikuya-fruitsbasket/fcitx5
   package:
     - unzip
     - build-essential
