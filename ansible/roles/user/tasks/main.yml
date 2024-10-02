@@ -4,14 +4,20 @@
     name: "{{ item }}"
     state: present
   become: true
+  when: user.groups is defined
   loop: "{{ user.groups }}"
+  tags: 
+    - user
 
 - name: Ensure group don't exists
   ansible.builtin.group:
     name: "{{ item }}"
     state: absent
   become: true
+  when: user.absent_groups is defined
   loop: "{{ user.absent_groups }}"
+  tags: 
+    - user
 
 - name: Ensure user exists
   ansible.builtin.user:
@@ -20,6 +26,7 @@
     groups: "{{ item.groups }}"
     password: "{{ item.password | password_hash('sha512', item.password_salt) }}"
   become: true
+  when: user.users is defined
   loop: "{{ user.users }}"
   tags: user
 
@@ -29,6 +36,7 @@
     state: absent
     remove: true
   become: true
+  when: user.absent_users is defined
   loop: "{{ user.absent_users }}"
   tags: user
 

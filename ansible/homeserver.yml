@@ -1,6 +1,6 @@
 ---
 - name: Provisioning
-  hosts: homeservers
+  hosts: homeserver
   roles:
     - apt
     - iptables
@@ -12,4 +12,6 @@
     - OpenLiteSpeed
     - Nextcloud
     - cron
-  tags: homeservers
+    - docker
+    - scripts
+  tags: homeserver

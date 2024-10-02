@@ -4,6 +4,8 @@
   community.general.homebrew:
     name: bitwarden-cli
     state: present
+  environment:
+    PATH: "{{ additional_path }}:{{ ansible_facts.env.PATH }}"
   tags:
     - bitwarden
 
@@ -11,7 +13,7 @@
     - name: Check bw config server value
       ansible.builtin.command: "bw config server"
       environment:
-        PATH: "{{ ansible_facts.env.PATH }}:{{ additional_path }}"
+        PATH: "{{ additional_path }}:{{ ansible_facts.env.PATH }}"
       changed_when: false
       register: check_bw_config_server
       tags:
@@ -20,7 +22,7 @@
     - name: Ensure bw config server is set
       ansible.builtin.command: "bw config server {{ bitwarden.server }}"
       environment:
-        PATH: "{{ ansible_facts.env.PATH }}:{{ additional_path }}"
+        PATH: "{{ additional_path }}:{{ ansible_facts.env.PATH }}"
       when: "bitwarden.server != check_bw_config_server.stdout"
       tags:
         - bitwarden
@@ -29,7 +31,7 @@
     - name: Check bw login status
       ansible.builtin.command: "bw login --check"
       environment:
-        PATH: "{{ ansible_facts.env.PATH }}:{{ additional_path }}"
+        PATH: "{{ additional_path }}:{{ ansible_facts.env.PATH }}"
       failed_when: false
       changed_when: false
       register: check_bw_login
@@ -47,7 +49,7 @@
     - name: Ensure logged into bw
       ansible.builtin.command: "bw login {{ bitwarden.email_address }} {{ bitwarden.password }} --code {{ two_step_login_code.user_input }}"
       environment:
-        PATH: "{{ ansible_facts.env.PATH }}:{{ additional_path }}"
+        PATH: "{{ additional_path }}:{{ ansible_facts.env.PATH }}"
       when: "'You are logged in!' not in check_bw_login.stdout"
       tags:
         - bitwarden

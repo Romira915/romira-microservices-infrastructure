@@ -5,15 +5,17 @@
     name: gh
     state: present
     update_homebrew: true
+  environment:
+    PATH: "{{ additional_path }}:{{ ansible_facts.env.PATH }}"
   tags:
     - gh
     - configuration
 
 - name: Set gh config
-  ansible.builtin.command: gh config set git_protocol ssh
+  ansible.builtin.command: gh config set git_protocol https
   environment:
     GH_TOKEN: "{{ gh.github_fine_grained_token }}"
-    PATH: "{{ ansible_facts.env.PATH }}:{{ additional_path }}"
+    PATH: "{{ additional_path }}:{{ ansible_facts.env.PATH }}"
   changed_when: false
   tags:
     - gh
@@ -23,8 +25,8 @@
   ansible.builtin.shell: gh repo clone {{ item.repo }} {{ item.dest }}
   environment:
     GH_TOKEN: "{{ gh.github_fine_grained_token }}"
-    GIT_SSH_COMMAND: ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
-    PATH: "{{ ansible_facts.env.PATH }}:{{ additional_path }}"
+    # GIT_SSH_COMMAND: ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+    PATH: "{{ additional_path }}:{{ ansible_facts.env.PATH }}"
   # args:
   #   stdin: "yes"
   failed_when: "'already exists' not in gh_repo_clone.stderr and gh_repo_clone.rc != 0"

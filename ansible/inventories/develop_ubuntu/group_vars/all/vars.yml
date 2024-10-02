@@ -1,4 +1,5 @@
-is_wsl: false
+is_wsl: true
+setup_user: romira
 windows_user: romira
 apt:
   dependencies:
@@ -7,8 +8,11 @@ apt:
     - gnupg
     - libbz2-dev
     - libfuse2
+    - librust-zip+deflate-zlib-dev
+    - g++-aarch64-linux-gnu
   repositories:
     - ppa:fish-shell/release-3
+    - ppa:ikuya-fruitsbasket/fcitx5
   package:
     - unzip
     - build-essential
@@ -24,12 +28,11 @@ apt:
     - fish
     - ttf-mscorefonts-installer
     - sshpass
-    - fcitx-bin
-    - fcitx-mozc
     - dbus-x11
     - language-pack-ja
     - nautilus
     - apache2-utils
+    - fcitx5-mozc
   install_state: present
 bitwarden:
   server: https://vaultwarden.romira.dev
@@ -40,69 +43,75 @@ develop_configuration:
   bw_ssh_private_key_item_id: 2c5a6eeb-b1e8-4217-b0b5-4d9d69d3cf76
   ssh_passphrase: "{{ vault_develop_configuration.vault_ssh_passphrase }}"
   directories:
-    - ~/.config/fish/
-    - ~/.config/mcfly/
-    - ~/.local/bin/
-    - ~/workspace/repositories
+    - "/home/{{ setup_user }}/.config/fish/"
+    - "/home/{{ setup_user }}/.config/mcfly/"
+    - "/home/{{ setup_user }}/.local/bin/"
+    - "/home/{{ setup_user }}/workspace/repositories"
   symbolic_links:
-    - src: ~/.config/romira-s-config/git/.gitconfig
-      dest: ~/.gitconfig
-    - src: ~/.config/romira-s-config/shell/.profile
-      dest: ~/.profile
-    - src: ~/.config/romira-s-config/fish/config.fish
-      dest: ~/.config/fish/config.fish
-    - src: ~/.config/romira-s-config/zsh/.zshrc
-      dest: ~/.zshrc
-    - src: ~/.config/romira-s-config/zsh/.zpreztorc
-      dest: ~/.zpreztorc
-    - src: ~/.config/romira-s-config/git/.bashrc
-      dest: ~/.bashrc
-    - src: ~/.config/romira-s-config/git/.bash_profile
-      dest: ~/.bash_profile
-    - src: ~/.config/romira-s-config/vim/.vim
-      dest: ~/.vim
-    - src: ~/.config/romira-s-config/vim/.vimrc
-      dest: ~/.vimrc
-    - src: ~/.config/romira-s-config/tmux/.tmux.conf
-      dest: ~/.tmux.conf
-    - src: ~/.config/romira-s-config/latex/.latexmkrc
-      dest: ~/.latexmkrc
-    - src: ~/.config/romira-s-config/miniconda3/.condarc
-      dest: ~/.condarc
-    - src: ~/.config/romira-s-config/zsh/.git-prompt.sh
-      dest: ~/.git-prompt.sh
-    - src: ~/.config/romira-s-config/mcfly/mcfly.fish
-      dest: ~/.config/mcfly/mcfly.fish
-    - src: ~/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent/bw_add_sshkeys
-      dest: ~/.local/bin/bw_add_sshkeys
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/git/.gitconfig"
+      dest: "/home/{{ setup_user }}/.gitconfig"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/shell/.profile"
+      dest: "/home/{{ setup_user }}/.profile"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/fish/config.fish"
+      dest: "/home/{{ setup_user }}/.config/fish/config.fish"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/zsh/.zshrc"
+      dest: "/home/{{ setup_user }}/.zshrc"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/zsh/.zpreztorc"
+      dest: "/home/{{ setup_user }}/.zpreztorc"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/bash/.bashrc"
+      dest: "/home/{{ setup_user }}/.bashrc"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/bash/.bash_profile"
+      dest: "/home/{{ setup_user }}/.bash_profile"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/vim/.vim"
+      dest: "/home/{{ setup_user }}/.vim"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/vim/.vimrc"
+      dest: "/home/{{ setup_user }}/.vimrc"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/tmux/.tmux.conf"
+      dest: "/home/{{ setup_user }}/.tmux.conf"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/latex/.latexmkrc"
+      dest: "/home/{{ setup_user }}/.latexmkrc"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/miniconda3/.condarc"
+      dest: "/home/{{ setup_user }}/.condarc"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/zsh/.git-prompt.sh"
+      dest: "/home/{{ setup_user }}/.git-prompt.sh"
+    - src: "/home/{{ setup_user }}/.config/romira-s-config/mcfly/mcfly.fish"
+      dest: "/home/{{ setup_user }}/.config/mcfly/mcfly.fish"
+    - src: "/home/{{ setup_user }}/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent/bw_add_sshkeys.py"
+      dest: "/home/{{ setup_user }}/.local/bin/bw_add_sshkeys"
   wsl_symbolic_links:
     - src: /mnt/c/Windows/System32/clip.exe
-      dest: ~/.local/bin/clip
-    - src: /mnt/c/Users/{{ windows_user }}/AppData/Local/Programs/Microsoft VS Code/bin/code
-      dest: ~/.local/bin/code
+      dest: "/home/{{ setup_user }}/.local/bin/clip"
+    - src: "/mnt/c/Users/{{ windows_user }}/AppData/Local/Programs/Microsoft VS Code/bin/code"
+      dest: "/home/{{ setup_user }}/.local/bin/code"
     - src: /mnt/c/Windows/explorer.exe
-      dest: ~/.local/bin/explorer
+      dest: "/home/{{ setup_user }}/.local/bin/explorer"
     - src: /mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe
-      dest: ~/.local/bin/msedgela
+      dest: "/home/{{ setup_user }}/.local/bin/msedge"
 gh:
   github_fine_grained_token: "{{ vault_gh.vault_github_fine_grained_token }}"
   repository:
     - repo: Romira915/ssh-config
-      dest: ~/.tmp/.ssh
+      dest: "/home/{{ setup_user }}/.tmp/.ssh"
     - repo: joaojacome/bitwarden-ssh-agent
-      dest: ~/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent
+      dest: "/home/{{ setup_user }}/workspace/repositories/github.com/joaojacome/bitwarden-ssh-agent"
+    - repo: Romira915/romira-s-config
+      dest: "/home/{{ setup_user }}/.config/romira-s-config"
+    - repo: sorin-ionescu/prezto
+      dest: "/home/{{ setup_user }}/.zprezto"
+    - repo: fcsonline/tmux-thumbs
+      dest: "/home/{{ setup_user }}/.tmux/plugins/tmux-thumbs"
 user:
   groups: []
   absent_groups: []
   users:
-    - name: romira
+    - name: "{{ setup_user }}"
       groups:
         - sudo
       password: "{{ vault_user.vault_romira.vault_password }}"
       password_salt: "{{ vault_user.vault_romira.vault_password_salt }}"
       authorized_keys: https://github.com/Romira915.keys
   absent_users: []
-additional_path: /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/romira/.cargo/bin
-miniconda_parent_dir: /home/romira
-miniconda_link_subdir: miniconda3
+additional_path: "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/{{ setup_user }}/.cargo/bin"
+miniconda_parent_dir: "/home/{{ setup_user }}/.local/share"
+miniconda_link_subdir: ../../.miniconda3
 miniconda_escalate: false

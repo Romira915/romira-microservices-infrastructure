@@ -115,10 +115,17 @@
     - openlitespeed
     - pear
 
+- name: Set PHP version fact
+  ansible.builtin.set_fact:
+    php_version: "{{ item.php | regex_replace('^lsphp', '') | regex_replace('([0-9])([0-9])$', '\\1.\\2') }}"
+  loop: "{{ lsphp }}"
+  tags:
+    - openlitespeed
+
 - name: Copy lsphp php.ini file
   ansible.builtin.copy:
     src: "{{ item.php }}/php.ini"
-    dest: "{{ openlitespeed_dir }}/{{ item.php }}/etc/php/8.2/litespeed/php.ini"
+    dest: "{{ openlitespeed_dir }}/{{ item.php }}/etc/php/{{ php_version }}/litespeed/php.ini"
   become: true
   loop: "{{ lsphp }}"
   notify: Restart lsphp (Detached mode)
@@ -128,7 +135,7 @@
 - name: Copy lsphp mods ini file
   ansible.builtin.copy:
     src: "{{ item.php }}/mods-available/"
-    dest: "{{ openlitespeed_dir }}/{{ item.php }}/etc/php/8.2/mods-available/"
+    dest: "{{ openlitespeed_dir }}/{{ item.php }}/etc/php/{{ php_version }}/mods-available/"
   become: true
   loop: "{{ lsphp }}"
   notify: Restart lsphp (Detached mode)
@@ -163,7 +170,7 @@
 
 - name: Ensure that vhosts config file exists
   ansible.builtin.template:
-    src: "vhosts/{{ item.name }}/vhconf.conf"
+    src: "inventories/{{ target_inventory }}/templates/openlitespeed/conf/vhosts/{{ item.name }}/vhconf.conf"
     dest: "{{ openlitespeed_dir }}/conf/vhosts/{{ item.name }}/vhconf.conf"
     owner: lsadm
     group: nogroup
@@ -177,7 +184,7 @@
 
 - name: Ensure that openlitespeed config file exists
   ansible.builtin.template:
-    src: httpd_config.conf
+    src: conf/httpd_config.conf
     dest: "{{ openlitespeed_dir }}/conf/httpd_config.conf"
     owner: lsadm
     group: nogroup
@@ -188,3 +195,15 @@
   tags:
     - openlitespeed
     - template
+
+- name: Ensure that mime.properties file exists
+  ansible.builtin.copy:
+    src: conf/mime.properties
+    dest: "{{ openlitespeed_dir }}/conf/mime.properties"
+    owner: lsadm
+    group: nogroup
+    mode: "0750"
+  become: true
+  notify: Reload openlitespeed
+  tags:
+    - openlitespeed

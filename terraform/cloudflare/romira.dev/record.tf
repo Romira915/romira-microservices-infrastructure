@@ -1,6 +1,6 @@
 resource "cloudflare_record" "api_want-this" {
   name    = "api.want-this"
-  value   = "138.2.19.89"
+  value   = data.terraform_remote_state.tokyo_always_free.outputs.ampere_public_ip
   type    = "A"
   zone_id = data.cloudflare_zone.romira_dev.id
 
@@ -10,7 +10,7 @@ resource "cloudflare_record" "api_want-this" {
 
 resource "cloudflare_record" "app" {
   name    = "app"
-  value   = "158.101.157.236"
+  value   = data.terraform_remote_state.tokyo_always_free.outputs.e2-1-micro-01-public_ip
   type    = "A"
   zone_id = data.cloudflare_zone.romira_dev.id
 
@@ -20,7 +20,7 @@ resource "cloudflare_record" "app" {
 
 resource "cloudflare_record" "blog" {
   name    = "blog"
-  value   = "138.2.19.89"
+  value   = data.terraform_remote_state.tokyo_always_free.outputs.ampere_public_ip
   type    = "A"
   zone_id = data.cloudflare_zone.romira_dev.id
 
@@ -30,7 +30,7 @@ resource "cloudflare_record" "blog" {
 
 resource "cloudflare_record" "dev-site" {
   name    = "dev-site"
-  value   = "138.2.19.89"
+  value   = data.terraform_remote_state.tokyo_always_free.outputs.ampere_public_ip
   type    = "A"
   zone_id = data.cloudflare_zone.romira_dev.id
 
@@ -41,7 +41,7 @@ resource "cloudflare_record" "dev-site" {
 
 resource "cloudflare_record" "oci-ampere" {
   name    = "oci-ampere"
-  value   = "138.2.19.89"
+  value   = data.terraform_remote_state.tokyo_always_free.outputs.ampere_public_ip
   type    = "A"
   zone_id = data.cloudflare_zone.romira_dev.id
 
@@ -61,7 +61,7 @@ resource "cloudflare_record" "oci_cloud" {
 
 resource "cloudflare_record" "oci-e2-1-micro" {
   name    = "oci-e2-1-micro"
-  value   = "158.101.157.236"
+  value   = data.terraform_remote_state.tokyo_always_free.outputs.e2-1-micro-01-public_ip
   type    = "A"
   zone_id = data.cloudflare_zone.romira_dev.id
 
@@ -81,7 +81,7 @@ resource "cloudflare_record" "sdtd" {
 
 resource "cloudflare_record" "vaultwarden" {
   name    = "vaultwarden"
-  value   = "138.2.19.89"
+  value   = data.terraform_remote_state.tokyo_always_free.outputs.ampere_public_ip
   type    = "A"
   zone_id = data.cloudflare_zone.romira_dev.id
 
@@ -91,7 +91,7 @@ resource "cloudflare_record" "vaultwarden" {
 
 resource "cloudflare_record" "want-this" {
   name    = "want-this"
-  value   = "138.2.19.89"
+  value   = data.terraform_remote_state.tokyo_always_free.outputs.ampere_public_ip
   type    = "A"
   zone_id = data.cloudflare_zone.romira_dev.id
 
@@ -101,7 +101,17 @@ resource "cloudflare_record" "want-this" {
 
 resource "cloudflare_record" "misskey" {
   name    = "misskey"
-  value   = "138.2.19.89"
+  value   = data.terraform_remote_state.tokyo_always_free.outputs.ampere_public_ip
+  type    = "A"
+  zone_id = data.cloudflare_zone.romira_dev.id
+
+  allow_overwrite = false
+  proxied         = true
+}
+
+resource "cloudflare_record" "comiketer" {
+  name    = "comiketer"
+  value   = data.terraform_remote_state.tokyo_always_free.outputs.ampere_public_ip
   type    = "A"
   zone_id = data.cloudflare_zone.romira_dev.id
 
@@ -205,4 +215,62 @@ resource "cloudflare_record" "home_game" {
   proxied         = false
 }
 
+resource "cloudflare_record" "atproto" {
+  name    = "_atproto"
+  value   = "did=did:plc:olexjetrerhh33nxps5t6rfk"
+  type    = "TXT"
+  zone_id = data.cloudflare_zone.romira_dev.id
 
+  allow_overwrite = false
+  proxied         = false
+}
+
+resource "cloudflare_record" "blog_TXT" {
+  name    = "blog"
+  value   = "google-site-verification=InZeDXEu17AyByzP_Vu3tQM2yG4IbOUrebPdZTRoQkc"
+  type    = "TXT"
+  zone_id = data.cloudflare_zone.romira_dev.id
+
+  allow_overwrite = false
+  proxied         = false
+}
+
+resource "cloudflare_record" "wakaba_cloud_A" {
+  name    = "wakaba.cloud"
+  value   = "223.132.3.241"
+  type    = "A"
+  zone_id = data.cloudflare_zone.romira_dev.id
+
+  allow_overwrite = false
+  proxied         = false
+}
+
+# resource "cloudflare_record" "wakaba_cloud_AAAA" {
+#   name    = "wakaba.cloud"
+#   value   = "240d:1a:fb7:6900:a916:e195:7e64:7152"
+#   type    = "AAAA"
+#   zone_id = data.cloudflare_zone.romira_dev.id
+
+#   allow_overwrite = false
+#   proxied         = false
+# }
+
+resource "cloudflare_record" "wakaba_vpn_A" {
+  name    = "wakaba.vpn"
+  value   = "223.132.3.241"
+  type    = "A"
+  zone_id = data.cloudflare_zone.romira_dev.id
+
+  allow_overwrite = false
+  proxied         = false
+}
+
+# resource "cloudflare_record" "wakaba_vpn_AAAA" {
+#   name    = "wakaba.vpn"
+#   value   = "240d:1a:fb7:6900:a916:e195:7e64:7152"
+#   type    = "AAAA"
+#   zone_id = data.cloudflare_zone.romira_dev.id
+
+#   allow_overwrite = false
+#   proxied         = false
+# }
