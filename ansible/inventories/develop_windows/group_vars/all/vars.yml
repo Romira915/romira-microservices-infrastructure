@@ -16,13 +16,10 @@ chocolatey:
     - googlejapaneseinput
     - eartrumpet
     - vivaldi
-    - microsoft-teams
-    - office-tool
     - unity-hub
     - line
     - teamviewer
     - google-drive-file-stream
-    - virtualbox
     - parsec
     - zoom
     - wakemeonlan
@@ -44,6 +41,8 @@ chocolatey:
     - bitwarden
     - rufus
     - dbeaver
+    - elevenclock
+    - alt-tab-terminator
     # For private
     - steam
     - musicbee
@@ -63,8 +62,6 @@ chocolatey:
     - epicgameslauncher
     - valorant
     - ea-app
-    - elevenclock
-    - alt-tab-terminator
     - "{{ vault_chocolatey.vault_package }}"
 scoop:
   bucket:
@@ -76,7 +73,6 @@ scoop:
     - name: nerd-fonts
   package:
     - rustup
-    - miniconda3
     - pandoc
     - pandoc-crossref
     - msys2
@@ -86,7 +82,6 @@ scoop:
     - vim
     - gradle
     - ghq
-    - vagrant
     - volta
     - rambox
     - nu
