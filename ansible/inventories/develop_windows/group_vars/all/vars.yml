@@ -12,7 +12,6 @@ chocolatey:
     - sumatrapdf
     - wireshark
     - docker-desktop
-    - authy-desktop
     - googlejapaneseinput
     - eartrumpet
     - vivaldi
@@ -24,13 +23,11 @@ chocolatey:
     - zoom
     - wakemeonlan
     - notion
-    - dropbox
     - nextcloud-client
     - procmon
     - wireguard
     - font-hackgen-nerd
     # - adobe-creative-cloud
-    - jmeter
     - postman
     - du
     - devtoys
@@ -40,7 +37,6 @@ chocolatey:
     - figma
     - bitwarden
     - rufus
-    - dbeaver
     - elevenclock
     - alt-tab-terminator
     # For private
