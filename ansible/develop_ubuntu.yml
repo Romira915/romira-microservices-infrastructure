@@ -10,15 +10,9 @@
     - gh
     - andrewrothstein.rust
   vars:
-    # linuxbrew_use_installer: true
+    linuxbrew_use_installer: true
     linuxbrew_init_shell: false
   tags: develop_ubuntu
-
-- name: Ensure that installed miniconda
-  hosts: develop_ubuntu
-  roles:
-    - andrewrothstein.miniconda
-  tags: miniconda
 
 - name: Ensure that deployed config file
   hosts: develop_ubuntu

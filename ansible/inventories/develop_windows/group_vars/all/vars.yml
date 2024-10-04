@@ -12,28 +12,22 @@ chocolatey:
     - sumatrapdf
     - wireshark
     - docker-desktop
-    - authy-desktop
     - googlejapaneseinput
     - eartrumpet
     - vivaldi
-    - microsoft-teams
-    - office-tool
     - unity-hub
     - line
     - teamviewer
     - google-drive-file-stream
-    - virtualbox
     - parsec
     - zoom
     - wakemeonlan
     - notion
-    - dropbox
     - nextcloud-client
     - procmon
     - wireguard
     - font-hackgen-nerd
     # - adobe-creative-cloud
-    - jmeter
     - postman
     - du
     - devtoys
@@ -43,7 +37,8 @@ chocolatey:
     - figma
     - bitwarden
     - rufus
-    - dbeaver
+    - elevenclock
+    - alt-tab-terminator
     # For private
     - steam
     - musicbee
@@ -63,8 +58,6 @@ chocolatey:
     - epicgameslauncher
     - valorant
     - ea-app
-    - elevenclock
-    - alt-tab-terminator
     - "{{ vault_chocolatey.vault_package }}"
 scoop:
   bucket:
@@ -76,7 +69,6 @@ scoop:
     - name: nerd-fonts
   package:
     - rustup
-    - miniconda3
     - pandoc
     - pandoc-crossref
     - msys2
@@ -86,7 +78,6 @@ scoop:
     - vim
     - gradle
     - ghq
-    - vagrant
     - volta
     - rambox
     - nu
@@ -156,3 +147,4 @@ package:
   - NVIDIA_Broadcast_v1.4.0.28.exe
   - iVCam_x64_v7.0.4.exe
   - GeForce_Experience_v3.25.1.27.exe
+  - wansview

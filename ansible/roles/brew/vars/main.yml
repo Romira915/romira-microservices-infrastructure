@@ -32,7 +32,6 @@ brew:
     - eza
     - git-delta
     - xh
-    - dog
     - sk
     - dust
     - bottom
@@ -46,7 +45,6 @@ brew:
     - git-lfs
     - starship
     - ghostscript
-    - gnuplot
     - php
     - composer
     - tfmigrate
