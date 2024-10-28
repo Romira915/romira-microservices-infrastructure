@@ -274,3 +274,13 @@ resource "cloudflare_record" "wakaba_vpn_A" {
 #   allow_overwrite = false
 #   proxied         = false
 # }
+
+resource "cloudflare_record" "api_wakaba_game_A" {
+  name    = "api.wakaba.game"
+  value   = "223.132.3.241"
+  type    = "A"
+  zone_id = data.cloudflare_zone.romira_dev.id
+
+  allow_overwrite = false
+  proxied         = false
+}
