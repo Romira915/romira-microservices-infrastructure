@@ -1,0 +1,33 @@
+---
+# tasks file for Tailscale
+- name: Add Tailscale GPG key
+  ansible.builtin.shell: |
+    curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/noble.noarmor.gpg | 
+    tee /usr/share/keyrings/tailscale-archive-keyring.gpg > /dev/null
+  become: true
+  tags:
+    - tailscale
+
+- name: Add Tailscale repository
+  ansible.builtin.shell: |
+    curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/noble.tailscale-keyring.list | 
+    tee /etc/apt/sources.list.d/tailscale.list
+  become: true
+  tags:
+    - tailscale
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+  become: true
+  tags:
+    - tailscale
+    - apt
+
+- name: Install Tailscale
+  ansible.builtin.apt:
+    name: tailscale
+    state: present
+  become: true
+  tags:
+    - tailscale

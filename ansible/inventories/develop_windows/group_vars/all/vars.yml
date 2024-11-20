@@ -58,6 +58,7 @@ chocolatey:
     - epicgameslauncher
     - valorant
     - ea-app
+    - tailscale
     - "{{ vault_chocolatey.vault_package }}"
 scoop:
   bucket:

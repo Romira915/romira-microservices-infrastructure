@@ -14,6 +14,7 @@
     - cron
     - docker
     - scripts
+    - Tailscale
   tags: wakaba
 
 - name: Provisioning from tasks
