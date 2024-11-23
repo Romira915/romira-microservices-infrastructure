@@ -25,10 +25,8 @@ user:
       password_salt: "{{ vault_user.vault_actions.vault_password_salt }}"
 samba:
   mount_dir: /mnt/d
-  interfaces: 127.0.0.0/8 enp3s0 enxc436c0ea26ff wg0
-  hosts_allow: 192.168.28.0/24 172.24.28.0/24
-  # hosts_allow: 192.168.15.0/24 172.24.20.0/24 172.17.15.0/24
-  # hosts_allow: 0.0.0.0/0
+  interfaces: 127.0.0.0/8 enxc436c0ea26ff wg0
+  hosts_allow: 192.168.28.0/24 172.24.28.0/24 100.64.0.0/10
 wg:
   endpoint: wakaba.vpn.romira.dev:53857
   interface:
@@ -77,13 +75,7 @@ wg:
       allowd_ips: 172.24.28.8/32
 iptables:
   allowed_ports: "{{ vault_iptables.vault_allowed_ports }}"
-  allowed_input_interfaces:
-    # - interface: enp3s0
-      # comment: internal dev
-    # - interface: enxc436c0ea26ff
-      # comment: internal dev
-    - interface: wg0
-      comment: wireguard dev
+  allowed_input_interfaces: []
   allowed_forward:
     - in_interface: wg0
     - out_interface: wg0
